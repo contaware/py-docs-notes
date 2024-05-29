@@ -1,75 +1,137 @@
 # Python Docs & Notes <!-- omit from toc -->
 
-This document is a reference guide for Python programming. It is a bit more than a simple cheat sheet, but it is not a learning book, you need to have some knowledge and experience about Python programming to understand these notes.
+This document is a reference guide for Python programming. It is a bit more than a simple cheat sheet, but it is not a learning book, you need to have some knowledge and experience with Python programming to understand these notes.
 
 
 ## Table of contents <!-- omit from toc -->
 
-- [Introduction](#introduction)
-- [py.exe launcher](#pyexe-launcher)
-- [Blocks, lines and spaces](#blocks-lines-and-spaces)
-- [Comments](#comments)
-- [(Im)mutability](#immutability)
+- [Install](#install)
+  - [Linux](#linux)
+  - [macOS](#macos)
+  - [Windows](#windows)
+- [Help](#help)
+- [Syntax](#syntax)
+- [Variables, immutability and mutability](#variables-immutability-and-mutability)
 - [Operators](#operators)
+  - [Overview](#overview)
+  - [Conditions can be chained](#conditions-can-be-chained)
+  - [For mutable types `a += b` is not the same as `a = a + b`](#for-mutable-types-a--b-is-not-the-same-as-a--a--b)
+- [Basic types](#basic-types)
+  - [Integers](#integers)
+  - [Floating-point numbers](#floating-point-numbers)
+  - [Complex numbers](#complex-numbers)
+  - [Booleans](#booleans)
+  - [Strings](#strings)
+  - [Bytes](#bytes)
+- [Collections](#collections)
+  - [List (ordered sequence of objects)](#list-ordered-sequence-of-objects)
+  - [Tuple (immutable list)](#tuple-immutable-list)
+  - [Set (unordered collection of unique items)](#set-unordered-collection-of-unique-items)
+  - [Dictionary (unordered collection accessed by key)](#dictionary-unordered-collection-accessed-by-key)
+- [Elements](#elements)
+  - [Length](#length)
+  - [Slicing](#slicing)
+  - [Checking if an element is contained](#checking-if-an-element-is-contained)
 - [Conditions](#conditions)
+  - [if](#if)
+  - [pass statement](#pass-statement)
 - [Loops](#loops)
-- [Strings](#strings)
-- [Bytes](#bytes)
-- [Lists (ordered sequence of objects)](#lists-ordered-sequence-of-objects)
-- [Sets (unordered collection of unique and immutable objects)](#sets-unordered-collection-of-unique-and-immutable-objects)
-- [Dictionaries (unordered and accessed by key)](#dictionaries-unordered-and-accessed-by-key)
-- [Tuples (immutable lists)](#tuples-immutable-lists)
-- [Len](#len)
-- [Slicing](#slicing)
-- [Checking if an element is contained or not](#checking-if-an-element-is-contained-or-not)
+  - [while](#while)
+  - [for](#for)
 - [Functions](#functions)
-- [Date/Time](#datetime)
+- [Classes](#classes)
 - [Input](#input)
 - [Import modules](#import-modules)
+- [Date/Time](#datetime)
 - [Packages](#packages)
-- [class](#class)
-- [Kivy](#kivy)
-- [How to use Python instead of Bash](#how-to-use-python-instead-of-bash)
+- [How to use Python instead of Shell](#how-to-use-python-instead-of-shell)
+  - [read file](#read-file)
+  - [write file](#write-file)
+  - [stdin](#stdin)
+  - [stdout](#stdout)
+  - [stderr](#stderr)
+  - [args](#args)
+  - [env](#env)
+  - [path](#path)
+  - [proc](#proc)
 
 
-## Introduction
+## Install
 
-Python is case-sensitive.
+To see whether Python is already installed, in your terminal run:
+
+```
+python --version   # on Windows
+python3 --version  # on Linux and macOS
+```
+
+### Linux
+
+To install on Debian/Ubuntu:
+
+```
+sudo apt install python3
+```
+
+### macOS
+
+To install using [Homebrew](https://brew.sh/):
+
+```
+brew install python
+```
+
+Close and reopen your terminal so that it finds the new version.
+
+### Windows
+
+For Windows [download](https://www.python.org/downloads/) the installer and run it. If you only have a single Python installation you should be done and you can skip the remaining of this section.
+
+For Windows the official Python installer provides the `py.exe` launcher which can be used to choose the wanted Python version.
+
+To list the installed versions:
+
+```
+py --list
+```
+
+To use a specific version:
+
+```
+py -<version> [python-args] [script]
+```
+
+- To set a default version add an environment variable like `PY_PYTHON=3.12`
+
+If you also have **non py-launcher aware** installations in your `PATH` (use `where python` or `where pip` to check that), then you may have problems using the correct `pip`. To execute the `pip` corresponding to the py-launcher:
+
+```
+py -<version> -m pip --version
+```
+
+
+## Help
 
 Help in Python is always available right in the interpreter:
 
-- `help(obj)` to know how an object works.
-- `dir(obj)` shows you all the object's methods.
-- `obj.__doc__` shows the object's documentation string.
+- `help([obj])` describes an object, without an argument the interactive help starts.
+- `dir([obj])` shows all the object's methods, without an argument it returns the list of names in the current local scope.
 
 
-## py.exe launcher
+## Syntax
 
-In Windows the official python installer uses the py.exe launcher which selects the correct version for you. But if you have also non-py aware installations in your `PATH` then you end up with problem using `pip`. To execute the correct used by the `py.exe` launcher issue:
+Python is **case-sensitive**. Comments start at `#` and end with the line, there are no multi-line comments. Python programmers usually use snake case (lowercase with words separated by underscores). Semicolons can be used to separate statements on the same line, but are not required to terminate statements.
 
-```
-py -m pip -V
-py -m pip install ...
-```
+Code blocks are always preceded by a colon on the previous line. You should be aware that the amount of spaces (or tabs) used for indenting code blocks is up to the user, as long as it is consistent throughout the script. Most style guides recommend to indent code blocks by four spaces instead of a tab (never mix tabs with spaces). Spaces within lines do not matter.
 
-Hint: use `where python` or `where pip` to see the installation path and execution order.
+It's possible to continue expressions on the next line if within parentheses. Also lists can span multiple lines.
 
 
-## Blocks, lines and spaces
+## Variables, immutability and mutability
 
-Code blocks are always preceded by a colon on the previous line. You should be aware that the amount of whitespace (or tabs) used for indenting code blocks is up to the user, as long as it is consistent throughout the script. Most style guides recommend to indent code blocks by four spaces instead of a tab (never mix tabs with spaces).
+In Python there are only objects. The object type is dynamic and determined at runtime.
 
-Whitespaces within lines do not matter and it's possible to continue expressions on the next line within parentheses. Also lists can span multiple lines. Semicolons separate statements on the same line.
-
-
-## Comments
-
-From `#` to the end of the line, there are no multiple line comments.
-
-
-## (Im)mutability
-
-Variable names are labels assigned to objects. Assigning variables is just like giving a new nickname, in `foo = bar = baz = 3` the variable names are just labels for the same object, no new object is created.
+Variable names are labels assigned to objects. Assigning variables is just like giving a new nickname, in `foo = bar = baz = 3` the variable names are just labels for the same object.
 
 1. Immutable are objects whose internal state/values can't be changed or altered (the object's methods return a new object):
 
@@ -83,59 +145,237 @@ Variable names are labels assigned to objects. Assigning variables is just like 
    list, set, dict
    ```
 
-   - Shallow copies (with `.copy` or **slicing**) only make a copy of the first level objects, sublists remain referenced. To copy everything use the module `copy.deepcopy`.
+   - Shallow copies (with `.copy` or [slicing](#slicing)) only make a copy of the first level objects, sublists remain referenced. To copy everything use the module `copy.deepcopy`
 
 
 To check whether two objects point to the same object us the identity operators `is` (not identity operator `is not`). Get the object id with `id(x)` and the object type with `type(x)`.
 
-In Python functions are using pass-by-assignment, when we call a function each parameter is assigned to the object they were passed in, each parameter becomes a new nickname to the object that was given in:
+In Python functions are using **pass-by-assignment**. When we call a function, each parameter becomes a new nickname to the given object:
 
 - If we pass in immutable arguments, then we have no way of modifying 
-the arguments themselves, it can look like Python uses the pass-by-value.
+the arguments themselves, it can look like Python uses the **pass-by-value**.
 
 - If we pass in mutable arguments, then we can change them, it can look 
-like Python uses a pass-by-reference.
+like Python uses a **pass-by-reference**.
 
 
 ## Operators
 
+### Overview
+
 ```
-Assign:                           = += -= *= /= **= %= //=
-For inc/dec use:                  x += 1  x -= 1
-Math operators:                   + - * / %
-Exponentiation operator:          **
-Truncation or floor division
-(truncates to negative infinity): //
-Comparison operators:             < <= > >= == !=
-Boolean values:                   True False
-Boolean operators:                and or not
-Bitwise operators:                ~ | & ^
-Shift operators:                  << >>
-Placeholder do nothing operation: pass
+Assign:                          = += -= *= /= **= %= //=
+Inc/dec:                         x += 1  x -= 1
+Math:                            + - * / %
+Exponentiation:                  **
+Truncation division
+(truncates to neg. infinity):    //
+Quotient and remainder (→tuple): divmod(num1, num2)
+Comparison:                      < <= > >= == !=
+Boolean:                         and or not
+Bitwise:                         ~ | & ^
+Shift:                           << >>
 ```
+
+### Conditions can be chained
 
 ```py
-int(x)
-float(x)
-str(x)
-list(x)
-round(number, num_digits)
-abs(number)
-divmod(num1, num2) # returns quotient and remainder
+1 < a < 3
 ```
 
-Conditions can be chained: `1 < a < 3`
+### For mutable types `a += b` is not the same as `a = a + b`
 
-Complex number: `4.21j`
+When the `+=` operator is used on an object which has an `__iadd__` (in-place addition) defined, the object is modified in place. Otherwise it will instead use `__add__` and return a new object. Mutable types have `__iadd__`, whereas immutable ones only have `__add__`.
 
-Integer with thousands separator: `1_000`
 
-For mutable types `a += b` is not the same as `a = a + b`:
+## Basic types
 
-When the `+=` operator is used on an object which has an `__iadd__` (in-place addition) defined, the object is modified in place. Otherwise it will instead use the plain `__add__` and return a new object. That is why for mutable types like lists `+=` changes the object's value, whereas for immutable types like tuples, strings and integers a new object is returned instead (`a += b` becomes equivalent to `a = a + b`).
+### Integers
+
+```py
+cost = 1_000  # thousands separator
+truncate = int(12.92)
+absolute_value = abs(-1)
+```
+
+### Floating-point numbers
+
+```py
+absolute_value = abs(-1.23)
+converted = float("12.3")
+rounded = round(3.1415, 2) # sec param is num of decimals
+                           # (defaults to 0)
+```
+
+### Complex numbers
+
+```py
+num = 12 + 1j  # need to place 1 before j
+```
+
+### Booleans
+
+```py
+is_red = True
+is_blue = False
+converted = bool(0)
+converted = bool(1)
+```
+
+### Strings
+
+Strings can either be single-quoted or double-quoted, the strings can contain backslash escapes like `\\`  `\'`  `\"`  `\r` `\n` `\t`. Use `\ooo` for the octal character `ooo` and `\xhh` for the hex character `hh`. Unicode characters are represented with `\uxxxx` or `\Uxxxxxxxx`. To have a string span multiple lines, place a backslash at the end of the line.
+
+Strings can optionally be prefixed with `r` or `R`, such strings are called raw strings and treat backslashes as literal characters.
+
+Making strings:
+
+```py
+converted = str(12)
+concatenation = "string1" + "String2"
+repetition = 4 * "string"
+```
+
+Strings manipulation:
+
+```py
+text.upper()
+text.lower()
+text.count(sub)
+text.find(sub, start, end_exclusive)  # start and end_exclusive are optional
+text.rfind(sub, start, end_exclusive) # start and end_exclusive are optional
+"1,2,3".split(",")                    # ['1', '2', '3']
+text.replace(old, new)
+"text with {} placeholders {} it".format("two", "in")
+"{:04d},{:4d},{:6.2f}".format(123, 453, 59.058)
+```
+
+Regular expression operations, use raw strings to avoid interpreting backslashes:
+
+```py
+import re
+re.split(r'[^a-zA-Z]', text)
+re.sub(r'pattern', r'replacement', text)
+```
+
+### Bytes
+
+```py
+utf8 = "Hello, World!".encode()
+print(utf8)           # b'Hello, World!'
+print(utf8.decode())  # Hello, World!
+
+r = [0x48, 0x65, 0x6C, 0x6C, 0x6F]
+Hello = bytes(r)
+print(Hello.decode()) # Hello
+
+mybytes = bytes.fromhex("f0f1 f2") # whitespaces are ignored
+b'\xf0\xf1\xf2'.hex() # "f0f1f2"
+```
+
+
+## Collections
+
+### List (ordered sequence of objects)
+
+```py
+cities = ["Vienna", "London", "Paris", 
+          "Berlin", "Zurich", "Hamburg"]
+
+cities[-1] = "New York" # replace last one
+cities.insert(i, "Bern")
+cities.pop(i)           # return & remove ith element
+cities.pop(-1)          # pop last one, same as pop()
+cities.append("Locarno")
+cities.extend(other)    # append list
+cities.remove("Berlin") # remove first occurrence
+cities.clear()          # clear all
+cities.index("Berlin")  # find position of element
+cities.index("Berlin", start)
+cities.index("Berlin", start, end_exclusive)
+```
+
+### Tuple (immutable list)
+
+```py
+t = ("tuples", "are", "immutable", "and", "are", "fast")
+
+x = t[0]
+t.count("are") # return the count of "are"
+t.index("are")
+t3 = t + t1    # combine tuples
+```
+
+### Set (unordered collection of unique items)
+
+```py
+x = {"a","b","c","d","e"}
+y = {"b","c"}
+
+x.add("a")     # does nothing
+y.add("a")
+y.discard("a") # or remove("a")
+x.difference(y)
+x.union(y)
+x.intersection(y)
+```
+
+### Dictionary (unordered collection accessed by key)
+
+```py
+person = {"first_name" : "John",
+          "last_name" : "Doe",
+          "age" : 33}
+
+x = person["first_name"]              # read
+person["first_name"] = "Jimmy"        # change
+person["email"] = "jim.doe@gmail.com" # add
+y = person.pop("email")               # return & remove
+del person["age"]                     # remove
+
+# Merges keys and values of person1 into person
+# (overwrites values with the same key)
+person1 = {"first_name" : "Jim", "country" : "USA"}
+person.update(person1)
+```
+
+
+## Elements
+
+Python uses zero based indexing; negative indexing is allowed (-1 represents the last element).
+
+### Length
+
+```py
+len(obj)
+```
+
+- It calls the obj's `__len__()` method.
+
+### Slicing
+
+Slicing does return a new sliced object (start and end_exclusive can be negative): 
+
+```py
+s[start:end_exclusive]      # extract from start till end_exclusive
+s[start:]                   # extract from start till last
+s[:end_exclusive]           # extract from begin till end_exclusive
+s[start:end_exclusive:step] # extract from start till end_exclusive
+                            # with increment of step
+```
+
+### Checking if an element is contained
+
+```py
+abc = ["a","b","c","d","e"]
+"a" in abc       # True
+"a" not in abc   # False
+```
 
 
 ## Conditions
+
+### if
 
 ```py
 if <condition>:
@@ -146,193 +386,79 @@ else:
     <one or more indented statements>
 ```
 
+### pass statement
+
+```py
+if <condition>:
+    pass   # do nothing
+else:
+    do_something()
+```
+
 
 ## Loops
+
+### while
+
+```py
+while <condition>:
+    <one or more indented statements>
+
+i = 0
+while i < 10:
+    print(i)
+    i += 1
+```
+
+### for
 
 ```py
 for <variable> in <list>:
      <one or more indented statements>
+
+nums = [1, 2, 3, 4, 5]
+for i in nums:
+    print(i)
 ```
+
+The **range type** represents an immutable sequence of numbers used for looping:
+
+```py
+range(count)                      # 0..(count - 1)
+range(start, end_exclusive)       # start..(end_exclusive - 1)
+range(start, end_exclusive, step) # range with step increments
+```
+
+The above for-loop example can be written like:
 
 ```py
 nums = [1, 2, 3, 4, 5]
 for i in range(len(nums)):
     print(nums[i])
-    
-range(count)                      # produces a range object from 0, ..., count - 1
-range(start, end_exclusive)       # produces a range object from start, ..., end_exclusive - 1
-range(start, end_exclusive, step) # produces a range object with step increments
 ```
 
-```py
-while <condition>:
-    <one or more indented statements>
-```
-
-Special statements: `break` and `continue`
-
-
-## Strings
-
-Strings can either be single-quoted or double-quoted, the strings can contain backslash escapes like `\\`  `\'`  `\"`  `\r` `\n` `\t`. Use `\ooo` for the octal character `ooo` and `\xhh` for the hex character `hh`. Unicode characters are represented with `\uxxxx` or `\Uxxxxxxxx`. To have a string span multiple lines, place a backslash at the end of the line.
-
-Strings can optionally be prefixed with `r` or `R`, such strings are called raw strings and treat backslashes as literal characters.
-
-```py
-concatenation = "string1" + "String2"
-repetition = 4 * "string"
-
-len("string")
-text.upper()
-text.lower()
-text.find(sub, start, end_exclusive) # start and end_exclusive are optional
-text.rfind(sub, start, end_exclusive) # start and end_exclusive are optional
-"1,2,3".split(",") # ['1', '2', '3']
-import re # use regular expression to split
-re.split(r'[^a-zA-Z]', text)
-text.replace(old, new)
-import re # use regular expression to replace 
-re.sub(r'pattern', r'replacement', text) # always prefix patterns containing \ escapes with raw strings (r in front of the string),
-                                         # otherwise the \ is interpreted as an escape sequence
-"text with {} placeholders {} it".format("two","in")
-"Art {:5d}, Price {:8.2f}".format(453, 59.058) # "Art   453, Price    59.06"
-"{:04d} {:04d} {:04d}".format(1, -17, 33) # 0001 -017 0033
-```
-
-
-## Bytes
-
-```py
-utf8 = "Hello, World!".encode()
-print(utf8) # b'Hello, World!'
-print(utf8.decode()) # Hello, World!
-
-r = [0x48, 0x65, 0x6C, 0x6C, 0x6F]
-Hello = bytes(r)
-print(Hello.decode()) # Hello
-
-mybytes = bytes.fromhex("f0f1 f2") # white spaces are ignored
-b'\xf0\xf1\xf2'.hex() # "f0f1f2"
-```
-
-
-## Lists (ordered sequence of objects)
-
-```py
-cities = ["Vienna", "London", "Paris", 
-          "Berlin", "Zurich", "Hamburg"]
-person = [["Marc", "Mayer"], 
-          ["17, Oxford Str", "12345", "London"], 
-          "07876-7876"]
-          
-print(person[1][0]) # 17, Oxford Str
-cities[-1] # "Hamburg"
-
-cities.insert(i, "Bern")
-person.pop(i) # returns and removes the ith element, pop(-1) is equivalent to pop() and pops the last element
-cities.append("Locarno")
-cities.extend(person) # adds the person list not as a sublist but as a continuation of the list
-cities.remove("Berlin") # remove the first occurrence of "Berlin" from the cities list
-cities.index("Berlin") # find the position of an element within a list
-cities.index("Berlin", start) # search starting at start
-cities.index("Berlin", start, end_exclusive) # search limited by start and end_exclusive
-```
-
-
-## Sets (unordered collection of unique and immutable objects)
-
-```py
-x = {"a","b","c","d","e"}
-y = {"b","c"}
-z = {"c","d"}
-
-z.add("y")
-z.discard("y") # or remove("y")
-x.difference(y)
-x.union(y)
-x.intersection(y)
-```
-
-
-## Dictionaries (unordered and accessed by key)
-
-```py
-person = {"first_name" : "John",
-          "last_name" : "Doe",
-          "age" : 33}
-
-x = person["first_name"] # read
-person["first_name"] = "Oliver" # change
-person["email"] = "oliver.pfister@gmx.ch" # add
-person.pop("email") # or del person["email"]
-person.update(person_new) # merges the keys and values of one dictionary into another, overwriting values of the same key
-```
-
-
-## Tuples (immutable lists)
-
-```py
-t = ("tuples", "are", "immutable", "and", "are", "fast")
-
-x = t[0] # read
-t.count("are") # returns the count of the given element
-t.index("are") # see list
-t3 = t + t1 # combine tuples
-```
-
-
-## Len
-
-Did you expect to have something like `list.len()` or `tuple.len()`? Actually there is something like that, but it is called `list.__len__()` or `tuple.__len__()`. And what `len()` really does is, it takes the object and tries to call the objects's `__len__()` method. So essentially, `len()` works only on objects that have a `__len__()` method. To get the last element you usually use `list[-1]`.
-
-
-## Slicing
-
-Slicing does not change the original object. Zero based indexing is used, start and end_exclusive can be negative, in which case index -1 represents the last element.
-
-```py
-s[start:end_exclusive]      # extract from start till end_exclusive
-s[start:]                   # extract from start till last
-s[:end_exclusive]           # extract from begin till end_exclusive
-s[start:end_exclusive:step] # extract from start till end_exclusive
-                            # with increment of step
-```
-
-
-## Checking if an element is contained or not
-
-```py
-abc = ["a","b","c","d","e"]
-"a" in abc       # True
-"a" not in abc   # False
-```
+The statements to break out of a loop and to jump to the start are: `break` and `continue`
 
 
 ## Functions
 
+The passed number of arguments must much the function definition, except for the default arguments which are optional:
+
 ```py
-def MyFunction(x, y):
-    global number	# global is only needed if you want to write to it
+def my_function(x, y):
+    global number   # make it global
     number = 3
-    z = 2 * (x + y) # variable names are by default local to the function
+    z = 2 * (x + y) # local to function
     return z
     
-def hello(name="everybody"):
-    result = "Hello " + name + "!")
-    
-def my_min(nums):
-    result = nums[0]
-    for num in nums:
-        if num < result:
-            result = num
-    return result
-my_min([4, 5, 6, 7, 2])
+def my_hello(name="everybody"): # default argument
+    return "Hello " + name + "!"
 ```
 
-Better to use varargs implemented with tuples and indicated by an `*`:
+Varargs implemented with tuples:
 
 ```py
-def my_min(*args): # args is just a name, you can name that vararg anything
+def my_min(*args): # args is a name of your choice
     result = args[0]
     for num in args:
         if num < result:
@@ -341,105 +467,17 @@ def my_min(*args): # args is just a name, you can name that vararg anything
 my_min(4, 5, 6, 7, 2)
 ```
 
-With `**` we can pass keyworded variable-length arguments to your function:
+Key-worded varargs implemented with dictionaries:
 
 ```py
-def my_func(**kwargs):
+def my_func(**kwargs): # kwargs is a name of your choice
     for kw in kwargs:
         print(kw, ":", kwargs[kw])
 my_func(shopkeeper = "Michael Palin", client = "John Cleese")
 ```
 
 
-## Date/Time
-
-```py
-import datetime
-now = datetime.datetime.now()
-past = datetime.datetime(2018, 8, 18, 10, 5, 56, 518515)
-print(now)
-print(past)
-print(now.strftime('%d.%m.%Y %H:%M:%S'))
-```
-
-
-## Input
-
-```py
-n = input("Enter a number: ")
-n = int(n) + 1
-print("Your number plus 1 is ", n)
-```
-
-
-## Import modules
-
-- import math, random
-
-  Every attribute or function are accessed by putting `math.` and `random.` in front of the name:
-  print(math.pi)
-  print(random.randint(0,9))
-
-- import numpy as np
-
-  This renames numpy to np within the script. Note that the name numpy itself is no longer valid.
-
-- from fibo import fib, fib2
-
-  This imports names from a module directly into the importing module's symbol table. This does not introduce the module name from which the imports are taken in the local symbol table (so in the example, fibo is not defined).
-
-- from fibo import *
-
-  This imports all names that a module defines. Do not use this facility since it introduces an unknown set of names into the interpreter, possibly hiding some things you have already defined.
-
-
-## Packages
-
-Packages are a way of structuring Python’s module namespace by using "dotted module names". For example, the module name A.B designates a submodule named B in a package named A.
-
-- import sound.effects.echo
-
-  This imports an individual module from the package. A function must be referenced like:
-  sound.effects.echo.echofilter(input, output, delay=0.7, atten=4)
-
-- from sound.effects import echo
-  We can call the function like:
-  echo.echofilter(input, output, delay=0.7, atten=4)
-
-- from sound.effects.echo import echofilter
-  We can call the function directly:
-  echofilter(input, output, delay=0.7, atten=4)
-
-System:
-configparser # ini files
-
-Multimedia:
-pillow
-opencv
-simplecv
-
-Games:
-pygame
-pyglet
-
-Network:
-requests
-scrapy
-twisted
-
-Math:
-numpy
-sciPy
-symPy
-matplotlib
-plotly
-
-Machine learning:
-keras
-tensorflow
-
-
-## class
+## Classes
 
 ```py
 import math
@@ -470,30 +508,80 @@ print (a1.compute_distance(a2))
 ```
 
 
-## Kivy
+## Input
 
-[Kivy](https://kivy.org) is an open source software library for the rapid development of applications equipped with novel user interfaces, such as multi-touch apps.
-
-Windows installation:
-
-```bat
-py -m pip install --upgrade pip wheel setuptools
-py -m pip install kivy[base] kivy_examples
-```
-
-Linux installation:
-
-```bash
-python3 -m pip install --upgrade pip wheel setuptools
-python3 -m pip install kivy[base] kivy_examples
+```py
+n = input("Enter a number: ") # returns a string
+n = int(n) + 1
+print("Your number plus 1 is ", n)
 ```
 
 
-## How to use Python instead of Bash
+## Import modules
 
-`#!/bin/bash`  →  `#!/usr/bin/env python`
+- `import math, random`: every attribute or function are accessed by putting `math.` and `random.` in front of the name like `print(math.pi)` or `print(random.randint(0,9))`
 
-read:
+- `import numpy as np`: this renames `numpy` to `np` within the script. Note that the name `numpy` itself is no longer valid.
+
+- `from fibo import fib, fib2`: this imports names from a module directly into the importing module's symbol table. This does not introduce the module name from which the imports are taken in the local symbol table (so in the example, `fibo` is not defined).
+
+- `from fibo import *`: this imports all names that a module defines. Do not use this facility since it introduces an unknown set of names into the interpreter, possibly hiding some things you have already defined.
+
+
+## Date/Time
+
+```py
+import datetime
+now = datetime.datetime.now()
+past = datetime.datetime(2018, 8, 18, 10, 5, 56, 518515)
+print(now)
+print(past)
+print(now.strftime('%d.%m.%Y %H:%M:%S'))
+```
+
+
+## Packages
+
+Packages are a way of structuring the module namespace by using "dotted module names". For example, the module name `pkgA.modB` designates a submodule named `modB` in a package named `pkgA`.
+
+- `import sound.effects.echo`: this imports an individual module from the package. A function is referenced like `sound.effects.echo.echofilter()`.
+
+- `from sound.effects import echo`: a function is referenced like `echo.echofilter()`.
+
+- `from sound.effects.echo import echofilter`: the function is referenced like `echofilter()`.
+
+The **Python Package Manager** should be called through the correct Python version:
+
+```
+python3 -m pip ...   # for Linux/macOS
+py -m pip ...        # for Windows
+```
+
+Typical commands (invoke `pip` like shown above):
+
+```
+pip list
+pip show <pkg>
+pip install <pkgs>
+pip install --upgrade <pkgs>
+pip uninstall <pkgs>
+```
+
+Small list of packages:
+
+- App framework: `kivy`
+- System: `configparser`
+- Multimedia: `pillow` `opencv` `simplecv`
+- Games: `pygame` `pyglet`
+- Network: `requests` `scrapy` `twisted`
+- Math: `numpy` `sciPy` `symPy` `matplotlib` `plotly`
+
+
+## How to use Python instead of Shell
+
+`#!/bin/sh`  →  `#!/usr/bin/env python`
+
+### read file
 
 ```py
 my_file = open('my_file.txt') # the default mode is 'r'
@@ -504,7 +592,7 @@ lines = file_text.splitlines() # with newline characters removed
 my_file.close()
 ```
 
-write:
+### write file
 
 ```py
 my_file = open('my_file.txt', 'w') # there is also 'a' to append
@@ -513,7 +601,7 @@ print('another line', file=my_file) # print adds a newline
 my_file.close()
 ```
 
-stdin:
+### stdin
 
 ```py
 import sys
@@ -522,26 +610,26 @@ for line in sys.stdin:
 text = sys.stdin.read() # slurp stdin in one go
 ```
 
-stdout:
+### stdout
 
 ```py
 print("Hello, stdout.") # functionally same as sys.stdout.write('Hello, stdout.\n')
 ```
 
-stderr:
+### stderr
 
 ```py
 print('a logging message.', file=sys.stderr) # functionally same as sys.stderr.write('a logging message.\n')
 ```
 
-args:
+### args
 
 ```py
 for arg in sys.argv[1:]: # argv[0] is the script name, skip that
     do_stuff_with(arg)
 ```
 
-env vars:
+### env
 
 ```py
 import os
@@ -549,7 +637,7 @@ os.environ['VAR'] # error is raised if the environment variable is not defined
 print(os.environ.get('VAR', 'default')) # returns default value if VAR not defined
 ```
 
-paths:
+### path
 
 ```py
 from pathlib import Path
@@ -577,7 +665,7 @@ shutil.copytree('src', 'dest') # $ cp -r src dest
 shutil.rmtree('a_dir') # $ rm -r a_dir
 ```
 
-proc:
+### proc
 
 ```py
 import subprocess as sp
