@@ -14,9 +14,11 @@ This document is a reference guide for Python programming. It is a bit more than
 - [Variables, immutability and mutability](#variables-immutability-and-mutability)
 - [Operators](#operators)
   - [Overview](#overview)
+  - [Division](#division)
   - [Conditions can be chained](#conditions-can-be-chained)
   - [For mutable types `a += b` is not the same as `a = a + b`](#for-mutable-types-a--b-is-not-the-same-as-a--a--b)
 - [Basic types](#basic-types)
+  - [NoneType](#nonetype)
   - [Integers](#integers)
   - [Floating-point numbers](#floating-point-numbers)
   - [Complex numbers](#complex-numbers)
@@ -122,21 +124,23 @@ Help in Python is always available right in the interpreter:
 
 Python is **case-sensitive**. Comments start at `#` and end with the line, there are no multi-line comments. Python programmers usually use snake case (lowercase with words separated by underscores). Semicolons can be used to separate statements on the same line, but are not required to terminate statements.
 
-Code blocks are always preceded by a colon on the previous line. You should be aware that the amount of spaces (or tabs) used for indenting code blocks is up to the user, as long as it is consistent throughout the script. Most style guides recommend to indent code blocks by four spaces instead of a tab (never mix tabs with spaces). Spaces within lines do not matter.
+Code blocks are always preceded by a colon on the previous line. You should be aware that the amount of spaces (or tabs) used for indenting code blocks is up to the user, as long as it is consistent throughout the script. Most style guides recommend to indent code blocks by four spaces instead of a tab (never mix tabs with spaces).
 
 It's possible to continue expressions on the next line if within parentheses. Also lists can span multiple lines.
 
 
 ## Variables, immutability and mutability
 
-In Python there are only objects. The object type is dynamic and determined at runtime.
+In Python all variables are objects, and the variable names are labels assigned to objects. Assigning variables is just like giving a new nickname, in `foo = bar = baz = 3` the variable names are just labels for the same object.
 
-Variable names are labels assigned to objects. Assigning variables is just like giving a new nickname, in `foo = bar = baz = 3` the variable names are just labels for the same object.
+Thanks to destructuring it's possible to multiple assign variables on one line like `x, y = 5, 11`.
 
-1. Immutable are objects whose internal state/values can't be changed or altered (the object's methods return a new object):
+The variable types are dynamic and determined at runtime. The objects are subdivide into two categories:
+
+1. Immutable are objects whose internal state/values can't be changed or altered:
 
    ```
-   int, float, bool, str, tuple, complex
+   NoneType, int, float, bool, str, tuple, complex
    ```
 
 2. Mutable are objects whose internal state/values can be changed after creation:
@@ -145,18 +149,16 @@ Variable names are labels assigned to objects. Assigning variables is just like 
    list, set, dict
    ```
 
-   - Shallow copies (with `.copy` or [slicing](#slicing)) only make a copy of the first level objects, sublists remain referenced. To copy everything use the module `copy.deepcopy`
+   - Shallow copies (with `.copy` or [slicing](#slicing)) only make a copy of the first level objects, sublists remain referenced. To copy everything use the `copy` module with its `copy.deepcopy()` function.
 
 
-To check whether two objects point to the same object us the identity operators `is` (not identity operator `is not`). Get the object id with `id(x)` and the object type with `type(x)`.
+To check whether two objects point to the same object us the identity operators `is` (not identity operator `is not`). Get the object id with `id(obj)` and the object type with `type(obj)`.
 
 In Python functions are using **pass-by-assignment**. When we call a function, each parameter becomes a new nickname to the given object:
 
-- If we pass in immutable arguments, then we have no way of modifying 
-the arguments themselves, it can look like Python uses the **pass-by-value**.
+1. If we pass-in immutable arguments, then we cannot modify the arguments themselves, the resulting behavior is **pass-by-value**.
 
-- If we pass in mutable arguments, then we can change them, it can look 
-like Python uses a **pass-by-reference**.
+2. If we pass-in mutable arguments, then we can change them, the resulting behavior is **pass-by-reference**.
 
 
 ## Operators
@@ -177,6 +179,10 @@ Bitwise:                         ~ | & ^
 Shift:                           << >>
 ```
 
+### Division
+
+The `/` operator treats the operands as floats (even if they are int) and performs a floating-point division.
+
 ### Conditions can be chained
 
 ```py
@@ -185,10 +191,18 @@ Shift:                           << >>
 
 ### For mutable types `a += b` is not the same as `a = a + b`
 
-When the `+=` operator is used on an object which has an `__iadd__` (in-place addition) defined, the object is modified in place. Otherwise it will instead use `__add__` and return a new object. Mutable types have `__iadd__`, whereas immutable ones only have `__add__`.
+When the `+=` operator is used on an object which has `__iadd__` (in-place addition) defined, the object is modified in place. Otherwise it will instead use `__add__` and return a new object. Mutable types have `__iadd__`, whereas immutable ones only have `__add__`.
 
 
 ## Basic types
+
+### NoneType
+
+```py
+x = None
+x is None     # True
+x is not None # False
+```
 
 ### Integers
 
@@ -218,36 +232,50 @@ num = 12 + 1j  # need to place 1 before j
 ```py
 is_red = True
 is_blue = False
-converted = bool(0)
-converted = bool(1)
+converted = bool(1) # True
+converted = bool(0) # False
 ```
 
 ### Strings
 
-Strings can either be single-quoted or double-quoted, the strings can contain backslash escapes like `\\`  `\'`  `\"`  `\r` `\n` `\t`. Use `\ooo` for the octal character `ooo` and `\xhh` for the hex character `hh`. Unicode characters are represented with `\uxxxx` or `\Uxxxxxxxx`. To have a string span multiple lines, place a backslash at the end of the line.
+Strings can either be single-quoted or double-quoted and can contain backslash escapes like `\\`  `\'`  `\"`  `\r` `\n` `\t`. Use `\ooo` for the octal character `ooo` and `\xhh` for the hex character `hh`. Unicode characters are represented with `\uxxxx` or `\Uxxxxxxxx`. Strings can optionally be prefixed with `r` or `R`, such strings are called raw strings and treat backslashes as literal characters.
 
-Strings can optionally be prefixed with `r` or `R`, such strings are called raw strings and treat backslashes as literal characters.
+To have a string span multiple lines, place a backslash at the end of the lines or to have the newlines in the string, surround in triple-quotes.
 
 Making strings:
 
 ```py
 converted = str(12)
-concatenation = "string1" + "String2"
 repetition = 4 * "string"
+concatenation = "str1" + "str2"
+span_lines = "str1\
+str2"
+multiline = """line1
+line2"""
 ```
 
-Strings manipulation:
+String formatting:
+
+```py
+val1, val2 = "two", "in"
+f"text with {val1} placeholders {val2} it"
+"text with {} placeholders {} it".format(val1, val2)
+"{:04d},{:4d},{:6.2f}".format(123, 453, 59.058)
+```
+
+String manipulation:
 
 ```py
 text.upper()
 text.lower()
 text.count(sub)
-text.find(sub, start, end_exclusive)  # start and end_exclusive are optional
-text.rfind(sub, start, end_exclusive) # start and end_exclusive are optional
-"1,2,3".split(",")                    # ['1', '2', '3']
+text.strip()  # trim whitespaces
+text.lstrip() # trim left whitespaces
+text.rstrip() # trim right whitespaces
+text.find(sub)
+text.rfind(sub)
+"1,2,3".split(",") # ['1', '2', '3']
 text.replace(old, new)
-"text with {} placeholders {} it".format("two", "in")
-"{:04d},{:4d},{:6.2f}".format(123, 453, 59.058)
 ```
 
 Regular expression operations, use raw strings to avoid interpreting backslashes:
@@ -269,8 +297,8 @@ r = [0x48, 0x65, 0x6C, 0x6C, 0x6F]
 Hello = bytes(r)
 print(Hello.decode()) # Hello
 
-mybytes = bytes.fromhex("f0f1 f2") # whitespaces are ignored
-b'\xf0\xf1\xf2'.hex() # "f0f1f2"
+mybytes = bytes.fromhex("f0f1 f2") # whitespaces ignored
+b'\xf0\xf1\xf2'.hex()              # "f0f1f2"
 ```
 
 
@@ -293,6 +321,8 @@ cities.clear()          # clear all
 cities.index("Berlin")  # find position of element
 cities.index("Berlin", start)
 cities.index("Berlin", start, end_exclusive)
+cities.sort()           # sort in-place
+sorted(cities)          # returns a new sorted list
 ```
 
 ### Tuple (immutable list)
@@ -361,7 +391,7 @@ s[start:end_exclusive]      # extract from start till end_exclusive
 s[start:]                   # extract from start till last
 s[:end_exclusive]           # extract from begin till end_exclusive
 s[start:end_exclusive:step] # extract from start till end_exclusive
-                            # with increment of step
+                            # with increments of step
 ```
 
 ### Checking if an element is contained
@@ -413,7 +443,8 @@ while i < 10:
 ### for
 
 ```py
-for <variable> in <list>:
+# Can loop over: str, list, tuple, set, dict
+for <variable> in <iterable>:
      <one or more indented statements>
 
 nums = [1, 2, 3, 4, 5]
@@ -421,7 +452,7 @@ for i in nums:
     print(i)
 ```
 
-The **range type** represents an immutable sequence of numbers used for looping:
+The **range type** represents an immutable sequence of numbers used to loop:
 
 ```py
 range(count)                      # 0..(count - 1)
@@ -446,12 +477,16 @@ The passed number of arguments must much the function definition, except for the
 
 ```py
 def my_function(x, y):
-    global number   # make it global
-    number = 3
-    z = 2 * (x + y) # local to function
+    global num      # make num global
+    num = 3
+    z = 2 * (x + y) # z is local to function
     return z
-    
-def my_hello(name="everybody"): # default argument
+
+def default_return():
+    a = 1 + 1
+print(default_return()) # returns None
+
+def default_arg(name="everybody"):
     return "Hello " + name + "!"
 ```
 
@@ -502,9 +537,9 @@ class Asteroid(Point):
         dist_y = self.y - other.get_y()
         return math.sqrt(dist_x*dist_x + dist_y*dist_y)
         
-a1 = Asteroid(0,0)
-a2 = Asteroid(3,4)
-print (a1.compute_distance(a2))
+a1 = Asteroid(0, 0)
+a2 = Asteroid(3, 4)
+print(a1.compute_distance(a2))
 ```
 
 
@@ -584,18 +619,18 @@ Small list of packages:
 ### read file
 
 ```py
-my_file = open('my_file.txt') # the default mode is 'r'
-for line in my_file: # we could also explicitly calling lines = list(my_file)
-    do_stuff_with(line.rstrip()) # python always returns the trailing newline
-file_text = my_file.read()
-lines = file_text.splitlines() # with newline characters removed
+my_file = open('my_file.txt')    # the default mode is 'r'
+for line in my_file:
+    do_stuff_with(line.rstrip()) # trim trailing newline
+text = my_file.read()            # slurp file in one go
+lines = text.splitlines()        # newline characters removed
 my_file.close()
 ```
 
 ### write file
 
 ```py
-my_file = open('my_file.txt', 'w') # there is also 'a' to append
+my_file = open('my_file.txt', 'w')  # there is also 'a' to append
 my_file.write('some text\n')
 print('another line', file=my_file) # print adds a newline
 my_file.close()
@@ -606,26 +641,31 @@ my_file.close()
 ```py
 import sys
 for line in sys.stdin:
-    do_stuff_with(line.rstrip()) # python always returns the trailing newline
-text = sys.stdin.read() # slurp stdin in one go
+    do_stuff_with(line.rstrip()) # trim trailing newline
+text = sys.stdin.read()          # slurp stdin in one go
 ```
 
 ### stdout
 
 ```py
-print("Hello, stdout.") # functionally same as sys.stdout.write('Hello, stdout.\n')
+import sys
+print('Hello, stdout.')
+sys.stdout.write('Hello, stdout.\n')
 ```
 
 ### stderr
 
 ```py
-print('a logging message.', file=sys.stderr) # functionally same as sys.stderr.write('a logging message.\n')
+import sys
+print('a logging message.', file=sys.stderr)
+sys.stderr.write('a logging message.\n')
 ```
 
 ### args
 
 ```py
-for arg in sys.argv[1:]: # argv[0] is the script name, skip that
+import sys
+for arg in sys.argv[1:]: # skip argv[0]
     do_stuff_with(arg)
 ```
 
@@ -633,52 +673,58 @@ for arg in sys.argv[1:]: # argv[0] is the script name, skip that
 
 ```py
 import os
-os.environ['VAR'] # error is raised if the environment variable is not defined
-print(os.environ.get('VAR', 'default')) # returns default value if VAR not defined
+os.environ['VAR']                # error if VAR not defined
+os.environ.get('VAR', 'default') # default if VAR not defined
 ```
 
 ### path
 
 ```py
 from pathlib import Path
-p = Path('C:\\Windows') # makes the given path
-p = Path() # makes a relative path from the current directory
-p = Path.cwd() # makes an absolute path from the current directory
-p = p.resolve() # makes the path absolute, replaces symbolic links with physical paths and makes all shares UNC
-for i in sorted(p.iterdir(), reverse = True): # iterate over directory content
+p = Path('C:\\Windows')
+p = Path()     # rel. path from current dir
+p = Path.cwd() # abs. path from current dir
+p.resolve()    # abs. physical path
+
+# Iterate
+for i in sorted(p.iterdir(), reverse = True):
     print(i)
-for i in sorted(p.glob('*.py'), reverse = True): # use filename globbing
+for i in sorted(p.glob('*.py'), reverse = True):
     print(i)
+
 p.name
 p.parent
 p.parts
 p.stat().st_size
-p.stat().st_mtime # print(datetime.datetime.fromtimestamp(p.stat().st_mtime))
-p.is_dir() # is existing dir?
-p.is_file() # is existing file?
+p.stat().st_mtime
+p.is_dir()
+p.is_file()
 p.unlink()
 p.rename(target)
 p.mkdir()
 p.rmdir()
+
 import shutil
-shutil.copytree('src', 'dest') # $ cp -r src dest
-shutil.rmtree('a_dir') # $ rm -r a_dir
+shutil.copytree('src', 'dest') # recursive copy
+shutil.rmtree('a_dir')         # recursive delete
 ```
 
 ### proc
 
 ```py
 import subprocess as sp
-proc = sp.run(['ls', '-lh']) # run always waits for the process to finish
+proc = sp.run(['ls', '-lh']) # blocks until done
 if proc.returncode != 0:
-    # do something else
-# The following with statement will automatically close the file after the nested block
+    do_something_else()
+
+# with statement closes file after nested block
 with open('./foo', 'w') as foofile:
     sp.run(['ls'], stdout=foofile)
 with open('foo') as foofile:
     sp.run(['tr', 'a-z', 'A-Z'], stdin=foofile)
 with open('foo.log', 'w') as logfile:
     sp.run(['ls', 'foo bar baz'], stderr=logfile)
+
 import psutil
 p = psutil.Process(pid)
 p.kill()
