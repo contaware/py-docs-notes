@@ -511,6 +511,31 @@ def my_func(**kwargs): # kwargs is a name of your choice
 my_func(shopkeeper = "Michael Palin", client = "John Cleese")
 ```
 
+**Lambda** functions (anonymous functions):
+
+```py
+lambda [args] : expression   # args comma separated
+
+greet = lambda : print('Hi') # zero args
+greet()                      # call like usual
+greet_name = lambda name : print('Hi', name)
+greet_name('John')
+x = lambda a, b : a * b
+print(x(3, 4))
+```
+
+A **Closure** is a function that references variables from the enclosing scope, even after the outer functions are done:
+
+```py
+def my_func(n):
+    return lambda a : a * n
+
+my_doubler = my_func(2)
+my_tripler = my_func(3)
+print(my_doubler(3))
+print(my_tripler(3))
+```
+
 
 ## Classes
 
