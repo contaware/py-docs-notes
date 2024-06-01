@@ -668,6 +668,9 @@ import sys
 for line in sys.stdin:
     do_stuff_with(line.rstrip()) # trim trailing newline
 text = sys.stdin.read()          # slurp stdin in one go
+
+# Hint: interrupt by sending EOF on its own line
+#       (Ctrl-D on Linux/macOS or CTRL-Z on Windows)
 ```
 
 ### stdout
