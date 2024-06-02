@@ -15,8 +15,11 @@ This document is a reference guide for Python programming. It is a bit more than
 - [Operators](#operators)
   - [Overview](#overview)
   - [Division](#division)
-  - [Conditions can be chained](#conditions-can-be-chained)
+  - [Chaining](#chaining)
+  - [Membership](#membership)
+  - [Slicing](#slicing)
   - [For mutable types `a += b` is not the same as `a = a + b`](#for-mutable-types-a--b-is-not-the-same-as-a--a--b)
+- [Length](#length)
 - [Basic types](#basic-types)
   - [NoneType](#nonetype)
   - [Integers](#integers)
@@ -24,16 +27,12 @@ This document is a reference guide for Python programming. It is a bit more than
   - [Complex numbers](#complex-numbers)
   - [Booleans](#booleans)
   - [Strings](#strings)
-  - [Bytes](#bytes)
+  - [Bytes and bytearray](#bytes-and-bytearray)
 - [Collections](#collections)
   - [List (ordered sequence of objects)](#list-ordered-sequence-of-objects)
   - [Tuple (immutable list)](#tuple-immutable-list)
   - [Set (unordered collection of unique items)](#set-unordered-collection-of-unique-items)
   - [Dictionary (unordered collection accessed by key)](#dictionary-unordered-collection-accessed-by-key)
-- [Elements](#elements)
-  - [Length](#length)
-  - [Slicing](#slicing)
-  - [Checking if an element is contained](#checking-if-an-element-is-contained)
 - [Conditions](#conditions)
   - [if](#if)
   - [pass statement](#pass-statement)
@@ -43,10 +42,13 @@ This document is a reference guide for Python programming. It is a bit more than
 - [Functions](#functions)
 - [Classes](#classes)
 - [Input](#input)
-- [Import modules](#import-modules)
+- [Modules](#modules)
+  - [Import](#import)
+  - [Custom](#custom)
 - [Date/Time](#datetime)
+- [JSON](#json)
 - [Packages](#packages)
-- [How to use Python instead of Shell](#how-to-use-python-instead-of-shell)
+- [Shell tasks in Python](#shell-tasks-in-python)
   - [read file](#read-file)
   - [write file](#write-file)
   - [stdin](#stdin)
@@ -65,6 +67,13 @@ To see whether Python is already installed, in your terminal run:
 ```
 python --version   # on Windows
 python3 --version  # on Linux and macOS
+```
+
+To verify that your script is running with the wanted version:
+
+```py
+import sys
+print(sys.version)
 ```
 
 ### Linux
@@ -128,6 +137,8 @@ Code blocks are always preceded by a colon on the previous line. You should be a
 
 It's possible to continue expressions on the next line if within parentheses. Also lists can span multiple lines.
 
+Python uses zero based indexing; negative indexing is allowed (-1 represents the last element).
+
 
 ## Variables, immutability and mutability
 
@@ -140,13 +151,13 @@ The variable types are dynamic and determined at runtime. The objects are subdiv
 1. Immutable are objects whose internal state/values can't be changed or altered:
 
    ```
-   NoneType, int, float, bool, str, tuple, complex
+   NoneType, int, float, bool, str, tuple, complex, bytes
    ```
 
 2. Mutable are objects whose internal state/values can be changed after creation:
 
    ```
-   list, set, dict
+   list, set, dict, bytearray
    ```
 
    - Shallow copies (with `.copy` or [slicing](#slicing)) only make a copy of the first level objects, sublists remain referenced. To copy everything use the `copy` module with its `copy.deepcopy()` function.
@@ -183,15 +194,44 @@ Shift:                           << >>
 
 The `/` operator treats the operands as floats (even if they are int) and performs a floating-point division.
 
-### Conditions can be chained
+### Chaining
 
 ```py
 1 < a < 3
 ```
 
+### Membership
+
+```py
+abc = ["a","b","c","d","e"]
+"a" in abc       # True
+"a" not in abc   # False
+```
+
+### Slicing
+
+Slicing does return a new sliced object (start and end_exclusive can be negative): 
+
+```py
+s[start:end_exclusive]      # extract from start till end_exclusive
+s[start:]                   # extract from start till last
+s[:end_exclusive]           # extract from begin till end_exclusive
+s[start:end_exclusive:step] # extract from start till end_exclusive
+                            # with increments of step
+```
+
 ### For mutable types `a += b` is not the same as `a = a + b`
 
 When the `+=` operator is used on an object which has `__iadd__` (in-place addition) defined, the object is modified in place. Otherwise it will instead use `__add__` and return a new object. Mutable types have `__iadd__`, whereas immutable ones only have `__add__`.
+
+
+## Length
+
+```py
+len(obj)
+```
+
+- It calls the obj's `__len__()` method.
 
 
 ## Basic types
@@ -286,19 +326,20 @@ re.split(r'[^a-zA-Z]', text)
 re.sub(r'pattern', r'replacement', text)
 ```
 
-### Bytes
+### Bytes and bytearray
 
 ```py
-utf8 = "Hello, World!".encode()
-print(utf8)           # b'Hello, World!'
-print(utf8.decode())  # Hello, World!
+# String to Bytes
+s = "Hello, World!"
+print(s.encode()) # utf8 bytes type
+print(bytearray(s, 'utf-8'))
 
-r = [0x48, 0x65, 0x6C, 0x6C, 0x6F]
-Hello = bytes(r)
-print(Hello.decode()) # Hello
-
-mybytes = bytes.fromhex("f0f1 f2") # whitespaces ignored
-b'\xf0\xf1\xf2'.hex()              # "f0f1f2"
+# Bytes to String
+utf8 = b'\x48\x65\x6c\x6c\x6f' # b'Hello'
+utf8_arr = bytearray(utf8)
+print(utf8.decode())
+utf8_arr[0] = 104
+print(str(utf8_arr, 'utf-8'))
 ```
 
 
@@ -315,20 +356,24 @@ cities.insert(i, "Bern")
 cities.pop(i)           # return & remove ith element
 cities.pop(-1)          # pop last one, same as pop()
 cities.append("Locarno")
-cities.extend(other)    # append list
+cities.extend(other)    # append other list
 cities.remove("Berlin") # remove first occurrence
 cities.clear()          # clear all
 cities.index("Berlin")  # find position of element
 cities.index("Berlin", start)
 cities.index("Berlin", start, end_exclusive)
+cities.reverse()        # reverse in-place
+list(reversed(cities))  # return a new reversed list
 cities.sort()           # sort in-place
-sorted(cities)          # returns a new sorted list
+cities.sort(reverse=True)
+sorted(cities)          # return a new sorted list
 ```
 
 ### Tuple (immutable list)
 
 ```py
 t = ("tuples", "are", "immutable", "and", "are", "fast")
+one = ("tuple",) # without the comma you get a string
 
 x = t[0]
 t.count("are") # return the count of "are"
@@ -361,45 +406,12 @@ x = person["first_name"]              # read
 person["first_name"] = "Jimmy"        # change
 person["email"] = "jim.doe@gmail.com" # add
 y = person.pop("email")               # return & remove
-del person["age"]                     # remove
+del(person["age"])                    # remove
 
 # Merges keys and values of person1 into person
 # (overwrites values with the same key)
 person1 = {"first_name" : "Jim", "country" : "USA"}
 person.update(person1)
-```
-
-
-## Elements
-
-Python uses zero based indexing; negative indexing is allowed (-1 represents the last element).
-
-### Length
-
-```py
-len(obj)
-```
-
-- It calls the obj's `__len__()` method.
-
-### Slicing
-
-Slicing does return a new sliced object (start and end_exclusive can be negative): 
-
-```py
-s[start:end_exclusive]      # extract from start till end_exclusive
-s[start:]                   # extract from start till last
-s[:end_exclusive]           # extract from begin till end_exclusive
-s[start:end_exclusive:step] # extract from start till end_exclusive
-                            # with increments of step
-```
-
-### Checking if an element is contained
-
-```py
-abc = ["a","b","c","d","e"]
-"a" in abc       # True
-"a" not in abc   # False
 ```
 
 
@@ -476,11 +488,13 @@ The statements to break out of a loop and to jump to the start are: `break` and 
 The passed number of arguments must much the function definition, except for the default arguments which are optional:
 
 ```py
-def my_function(x, y):
-    global num      # make num global
+def my_calc(x, y):
+    global num        # make num global
     num = 3
-    z = 2 * (x + y) # z is local to function
+    z = 2 * x + y     # z is local to function
     return z
+my_calc(1, 2)         # positional args
+my_calc(y = 2, x = 1) # named args
 
 def default_return():
     a = 1 + 1
@@ -577,7 +591,9 @@ print("Your number plus 1 is ", n)
 ```
 
 
-## Import modules
+## Modules
+
+### Import
 
 - `import math, random`: every attribute or function are accessed by putting `math.` and `random.` in front of the name like `print(math.pi)` or `print(random.randint(0,9))`
 
@@ -586,6 +602,15 @@ print("Your number plus 1 is ", n)
 - `from fibo import fib, fib2`: this imports names from a module directly into the importing module's symbol table. This does not introduce the module name from which the imports are taken in the local symbol table (so in the example, `fibo` is not defined).
 
 - `from fibo import *`: this imports all names that a module defines. Do not use this facility since it introduces an unknown set of names into the interpreter, possibly hiding some things you have already defined.
+
+### Custom
+
+Just create a Python file and import it without the `.py` extension:
+
+```py
+import mymodule
+mymodule.myfunc("Hi")
+```
 
 
 ## Date/Time
@@ -597,6 +622,19 @@ past = datetime.datetime(2018, 8, 18, 10, 5, 56, 518515)
 print(now)
 print(past)
 print(now.strftime('%d.%m.%Y %H:%M:%S'))
+```
+
+
+## JSON
+
+```py
+import json
+json_str = '{"first_name": "John", "last_name": "Doe", "age": 30}'
+print(type(json_str), json_str)
+user = json.loads(json_str)  # str -> dict
+print(type(user), user)
+json_str2 = json.dumps(user) # dict -> str
+print(type(json_str2), json_str2)
 ```
 
 
@@ -637,7 +675,7 @@ Small list of packages:
 - Math: `numpy` `sciPy` `symPy` `matplotlib` `plotly`
 
 
-## How to use Python instead of Shell
+## Shell tasks in Python
 
 `#!/bin/sh`  →  `#!/usr/bin/env python`
 
@@ -649,6 +687,9 @@ for line in my_file:
     do_stuff_with(line.rstrip()) # trim trailing newline
 text = my_file.read()            # slurp file in one go
 lines = text.splitlines()        # newline characters removed
+print(my_file.name)              # file name
+print(my_file.mode)              # file mode
+print(my_file.closed)            # is file closed?
 my_file.close()
 ```
 
