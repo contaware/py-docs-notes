@@ -677,7 +677,7 @@ Small list of packages:
 
 ## Shell tasks in Python
 
-`#!/bin/sh`  →  `#!/usr/bin/env python`
+`#!/bin/sh`  →  `#!/usr/bin/env python3`
 
 ### read file
 
