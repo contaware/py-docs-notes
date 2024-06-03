@@ -48,6 +48,12 @@ This document is a reference guide for Python programming. It is a bit more than
 - [Date/Time](#datetime)
 - [JSON](#json)
 - [Packages](#packages)
+  - [Use](#use)
+  - [Manage](#manage)
+  - [Virtual environment](#virtual-environment)
+    - [Linux/macOS](#linuxmacos)
+    - [Windows](#windows-1)
+  - [Examples of packages](#examples-of-packages)
 - [Shell tasks in Python](#shell-tasks-in-python)
   - [read file](#read-file)
   - [write file](#write-file)
@@ -640,6 +646,8 @@ print(type(json_str2), json_str2)
 
 ## Packages
 
+### Use
+
 Packages are a way of structuring the module namespace by using "dotted module names". For example, the module name `pkgA.modB` designates a submodule named `modB` in a package named `pkgA`.
 
 - `import sound.effects.echo`: this imports an individual module from the package. A function is referenced like `sound.effects.echo.echofilter()`.
@@ -648,7 +656,9 @@ Packages are a way of structuring the module namespace by using "dotted module n
 
 - `from sound.effects.echo import echofilter`: the function is referenced like `echofilter()`.
 
-The **Python Package Manager** should be called through the correct Python version:
+### Manage
+
+The Python Package Manager (pip) should be called through the correct Python version:
 
 ```
 python3 -m pip ...   # for Linux/macOS
@@ -665,14 +675,65 @@ pip install --upgrade <pkgs>
 pip uninstall <pkgs>
 ```
 
-Small list of packages:
+- Instead of installing globally, it's possible to use the `--user` option to install packages for the current user only.
+- To protect packages which may also be installed by your system package manager (like `apt` for example), since Python 3.11 some systems require the `--break-system-packages` option, and that also with the `--user` option.
 
-- App framework: `kivy`
-- System: `configparser`
-- Multimedia: `pillow` `opencv` `simplecv`
+### Virtual environment
+
+It's possible to create an isolated Python installation with separate packages for a each of your projects. To do that, go to your project's directory and run the following commands:
+
+#### Linux/macOS
+
+1. Create a virtual environment in `.venv` directory:
+
+   ```
+   python3 -m venv .venv
+   ```
+
+2. Active the virtual environment:
+
+   ```
+   . .venv/bin/activate
+   ```
+
+3. Install/uninstall packages with `pip` and execute your programs with `python`
+
+4. Deactivate the virtual environment (or just close the terminal):
+
+   ```
+   deactivate
+   ```
+
+#### Windows
+
+1. Create a virtual environment in `.venv` directory:
+
+   ```
+   py -m venv .venv
+   ```
+
+2. Active the virtual environment:
+
+   ```
+   .venv\Scripts\activate
+   ```
+
+3. Install/uninstall packages with `pip` and execute your programs with `python`
+
+4. Deactivate the virtual environment (or just close the terminal):
+
+   ```
+   deactivate
+   ```
+
+### Examples of packages
+
+- App frameworks: `kivy` `pyqt` `tkinter`
+- Parsers: `configparser` `csv` `xml` `json`
+- Multimedia: `audioflux` `pillow` `moviepy` `opencv` `simplecv`
 - Games: `pygame` `pyglet`
 - Network: `requests` `scrapy` `twisted`
-- Math: `numpy` `sciPy` `symPy` `matplotlib` `plotly`
+- Math: `pandas` `numpy` `scipy` `sympy` `matplotlib` `plotly`
 
 
 ## Shell tasks in Python
