@@ -660,10 +660,8 @@ Packages are a way of structuring the module namespace by using "dotted module n
 
 The Python Package Manager (pip) should be called through the correct Python version:
 
-```
-python3 -m pip ...   # for Linux/macOS
-py -m pip ...        # for Windows
-```
+- Linux/macOS: `python3 -m pip ...`
+- Windows: `py -m pip ...`
 
 Typical commands (invoke `pip` like shown above):
 
