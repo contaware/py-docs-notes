@@ -688,7 +688,7 @@ It's possible to create an isolated Python installation with separate packages f
    python3 -m venv .venv
    ```
 
-2. Active the virtual environment:
+2. Activate the virtual environment:
 
    ```
    . .venv/bin/activate
@@ -710,7 +710,7 @@ It's possible to create an isolated Python installation with separate packages f
    py -m venv .venv
    ```
 
-2. Active the virtual environment:
+2. Activate the virtual environment:
 
    ```
    .venv\Scripts\activate
