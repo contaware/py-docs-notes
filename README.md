@@ -6,10 +6,12 @@ This document is a reference guide for Python programming. It is a bit more than
 ## Table of contents <!-- omit from toc -->
 
 - [Install](#install)
+  - [Check](#check)
   - [Linux](#linux)
   - [macOS](#macos)
   - [Windows](#windows)
 - [Help](#help)
+- [Shebang line](#shebang-line)
 - [Syntax](#syntax)
 - [Variables, immutability and mutability](#variables-immutability-and-mutability)
 - [Operators](#operators)
@@ -45,8 +47,6 @@ This document is a reference guide for Python programming. It is a bit more than
 - [Modules](#modules)
   - [Import](#import)
   - [Custom](#custom)
-- [Date/Time](#datetime)
-- [JSON](#json)
 - [Packages](#packages)
   - [Use](#use)
   - [Manage](#manage)
@@ -54,19 +54,23 @@ This document is a reference guide for Python programming. It is a bit more than
     - [Linux/macOS](#linuxmacos)
     - [Windows](#windows-1)
   - [Examples of packages](#examples-of-packages)
-- [Shell tasks in Python](#shell-tasks-in-python)
-  - [read file](#read-file)
-  - [write file](#write-file)
+- [Date/Time](#datetime)
+- [JSON](#json)
+- [I/O and processes](#io-and-processes)
+  - [Read file](#read-file)
+  - [Write file](#write-file)
   - [stdin](#stdin)
   - [stdout](#stdout)
   - [stderr](#stderr)
-  - [args](#args)
-  - [env](#env)
-  - [path](#path)
-  - [proc](#proc)
+  - [Arguments](#arguments)
+  - [Environment variables](#environment-variables)
+  - [Path](#path)
+  - [Processes](#processes)
 
 
 ## Install
+
+### Check
 
 To see whether Python is already installed, in your terminal run:
 
@@ -133,6 +137,15 @@ Help in Python is always available right in the interpreter:
 
 - `help([obj])` describes an object, without an argument the interactive help starts.
 - `dir([obj])` shows all the object's methods, without an argument it returns the list of names in the current local scope.
+
+
+## Shebang line
+
+Under Linux/macOS to be able to execute a Python script without invoking it through `python3`, make it executable and add a shebang line at the top of the file:
+
+```py
+#!/usr/bin/env python3
+```
 
 
 ## Syntax
@@ -619,31 +632,6 @@ mymodule.myfunc("Hi")
 ```
 
 
-## Date/Time
-
-```py
-import datetime
-now = datetime.datetime.now()
-past = datetime.datetime(2018, 8, 18, 10, 5, 56, 518515)
-print(now)
-print(past)
-print(now.strftime('%d.%m.%Y %H:%M:%S'))
-```
-
-
-## JSON
-
-```py
-import json
-json_str = '{"first_name": "John", "last_name": "Doe", "age": 30}'
-print(type(json_str), json_str)
-user = json.loads(json_str)  # str -> dict
-print(type(user), user)
-json_str2 = json.dumps(user) # dict -> str
-print(type(json_str2), json_str2)
-```
-
-
 ## Packages
 
 ### Use
@@ -734,14 +722,37 @@ It's possible to create an isolated Python installation with separate packages f
 - Math: `pandas` `numpy` `scipy` `sympy` `matplotlib` `plotly`
 
 
-## Shell tasks in Python
-
-`#!/bin/sh`  →  `#!/usr/bin/env python3`
-
-### read file
+## Date/Time
 
 ```py
-my_file = open('my_file.txt')    # the default mode is 'r'
+import datetime
+now = datetime.datetime.now()
+past = datetime.datetime(2018, 8, 18, 10, 5, 56, 518515)
+print(now)
+print(past)
+print(now.strftime('%d.%m.%Y %H:%M:%S'))
+```
+
+
+## JSON
+
+```py
+import json
+json_str = '{"first_name": "John", "last_name": "Doe", "age": 30}'
+print(type(json_str), json_str)
+user = json.loads(json_str)  # str -> dict
+print(type(user), user)
+json_str2 = json.dumps(user) # dict -> str
+print(type(json_str2), json_str2)
+```
+
+
+## I/O and processes
+
+### Read file
+
+```py
+my_file = open('my_file.txt')    # default mode is 'r'
 for line in my_file:
     do_stuff_with(line.rstrip()) # trim trailing newline
 text = my_file.read()            # slurp file in one go
@@ -752,10 +763,10 @@ print(my_file.closed)            # is file closed?
 my_file.close()
 ```
 
-### write file
+### Write file
 
 ```py
-my_file = open('my_file.txt', 'w')  # there is also 'a' to append
+my_file = open('my_file.txt', 'w')  # use 'a' to append
 my_file.write('some text\n')
 print('another line', file=my_file) # print adds a newline
 my_file.close()
@@ -789,7 +800,7 @@ print('a logging message.', file=sys.stderr)
 sys.stderr.write('a logging message.\n')
 ```
 
-### args
+### Arguments
 
 ```py
 import sys
@@ -797,7 +808,7 @@ for arg in sys.argv[1:]: # skip argv[0]
     do_stuff_with(arg)
 ```
 
-### env
+### Environment variables
 
 ```py
 import os
@@ -805,7 +816,7 @@ os.environ['VAR']                # error if VAR not defined
 os.environ.get('VAR', 'default') # default if VAR not defined
 ```
 
-### path
+### Path
 
 ```py
 from pathlib import Path
@@ -837,7 +848,7 @@ shutil.copytree('src', 'dest') # recursive copy
 shutil.rmtree('a_dir')         # recursive delete
 ```
 
-### proc
+### Processes
 
 ```py
 import subprocess as sp
