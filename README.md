@@ -135,8 +135,8 @@ py -<version> -m pip --version
 
 Help in Python is always available right in the interpreter:
 
-- `help([obj])` describes an object, without an argument the interactive help starts.
-- `dir([obj])` shows all the object's methods, without an argument it returns the list of names in the current local scope.
+- `help(obj)` describes an object, without an argument the interactive help starts.
+- `dir(obj)` shows all the object's methods, without an argument it returns the list of names in the current local scope.
 
 
 ## Shebang line
@@ -154,7 +154,7 @@ Python is **case-sensitive**. Comments start at `#` and end with the line, there
 
 Code blocks are always preceded by a colon on the previous line. You should be aware that the amount of spaces (or tabs) used for indenting code blocks is up to the user, as long as it is consistent throughout the script. Most style guides recommend to indent code blocks by four spaces instead of a tab (never mix tabs with spaces).
 
-It's possible to continue expressions on the next line if within parentheses. Also lists can span multiple lines.
+It's possible to continue expressions on the next line if within parentheses. Also the initializations of the collection types can span multiple lines.
 
 Python uses zero based indexing; negative indexing is allowed (-1 represents the last element).
 
@@ -163,17 +163,17 @@ Python uses zero based indexing; negative indexing is allowed (-1 represents the
 
 In Python all variables are objects, and the variable names are labels assigned to objects. Assigning variables is just like giving a new nickname, in `foo = bar = baz = 3` the variable names are just labels for the same object.
 
-Thanks to destructuring it's possible to multiple assign variables on one line like `x, y = 5, 11`.
+Thanks to **destructuring** it's possible to multiple assign variables on one line like `x, y = 5, 11`.
 
-The variable types are dynamic and determined at runtime. The objects are subdivide into two categories:
+The variable types are **dynamic** and determined at runtime. The objects are subdivide into two categories:
 
-1. Immutable are objects whose internal state/values can't be changed or altered:
+1. **Immutable** are objects whose internal state/values can't be changed or altered:
 
    ```
    NoneType, int, float, bool, str, tuple, complex, bytes
    ```
 
-2. Mutable are objects whose internal state/values can be changed after creation:
+2. **Mutable** are objects whose internal state/values can be changed after creation:
 
    ```
    list, set, dict, bytearray
@@ -276,14 +276,17 @@ absolute_value = abs(-1)
 ```py
 absolute_value = abs(-1.23)
 converted = float("12.3")
-rounded = round(3.1415, 2) # sec param is num of decimals
-                           # (defaults to 0)
+
+# The second argument is the number
+# of decimals which defaults to 0
+rounded = round(3.1415, 2)
 ```
 
 ### Complex numbers
 
 ```py
-num = 12 + 1j  # need to place 1 before j
+# We always need a number before j
+num = 12 + 1j
 ```
 
 ### Booleans
@@ -297,7 +300,7 @@ converted = bool(0) # False
 
 ### Strings
 
-Strings can either be single-quoted or double-quoted and can contain backslash escapes like `\\`  `\'`  `\"`  `\r` `\n` `\t`. Use `\ooo` for the octal character `ooo` and `\xhh` for the hex character `hh`. Unicode characters are represented with `\uxxxx` or `\Uxxxxxxxx`. Strings can optionally be prefixed with `r` or `R`, such strings are called raw strings and treat backslashes as literal characters.
+Strings can either be single-quoted or double-quoted and can contain backslash escapes like `\\`  `\'`  `\"`  `\r` `\n` `\t`. Use `\ooo` for the octal character `ooo` and `\xhh` for the hex character `hh`. Unicode characters are represented with `\uxxxx` or `\Uxxxxxxxx`. Strings prefixed with `r` or `R` are raw strings which treat backslashes as literal characters.
 
 To have a string span multiple lines, place a backslash at the end of the lines or to have the newlines in the string, surround in triple-quotes.
 
@@ -406,12 +409,13 @@ t3 = t + t1    # combine tuples
 x = {"a","b","c","d","e"}
 y = {"b","c"}
 
-x.add("a")     # does nothing
+x.add("a")        # does nothing
 y.add("a")
-y.discard("a") # or remove("a")
-x.difference(y)
-x.union(y)
-x.intersection(y)
+y.remove("a")     # raises error if not present
+y.discard("a")    # remove if present
+x.difference(y)   # return difference as new set
+x.union(y)        # return union as new set
+x.intersection(y) # return intersection as new set
 ```
 
 ### Dictionary (unordered collection accessed by key)
@@ -425,7 +429,7 @@ x = person["first_name"]              # read
 person["first_name"] = "Jimmy"        # change
 person["email"] = "jim.doe@gmail.com" # add
 y = person.pop("email")               # return & remove
-del(person["age"])                    # remove
+del person["age"]                     # remove
 
 # Merges keys and values of person1 into person
 # (overwrites values with the same key)
@@ -541,7 +545,7 @@ Key-worded varargs implemented with dictionaries:
 def my_func(**kwargs): # kwargs is a name of your choice
     for kw in kwargs:
         print(kw, ":", kwargs[kw])
-my_func(shopkeeper = "Michael Palin", client = "John Cleese")
+my_func(shopkeeper = "M. Palin", client = "J. Cleese")
 ```
 
 **Lambda** functions (anonymous functions):
@@ -805,7 +809,7 @@ sys.stderr.write('a logging message.\n')
 ```py
 import sys
 for arg in sys.argv[1:]: # skip argv[0]
-    do_stuff_with(arg)
+    print(arg)
 ```
 
 ### Environment variables
