@@ -400,7 +400,7 @@ one = ("tuple",) # without the comma you get a string
 x = t[0]
 t.count("are") # return the count of "are"
 t.index("are")
-t3 = t + t1    # combine tuples
+t3 = t + one   # combine tuples
 ```
 
 ### Set (unordered collection of unique items)
@@ -525,6 +525,7 @@ print(default_return()) # returns None
 
 def default_arg(name="everybody"):
     return "Hello " + name + "!"
+print(default_arg())
 ```
 
 Varargs implemented with tuples:
@@ -658,14 +659,14 @@ The Python Package Manager (pip) should be called through the correct Python ver
 Typical commands (invoke `pip` like shown above):
 
 ```
-pip list
+pip list -v
 pip show <pkg>
 pip install <pkgs>
 pip install --upgrade <pkgs>
 pip uninstall <pkgs>
 ```
 
-- Instead of installing globally, it's possible to use the `--user` option to install packages for the current user only.
+- Instead of installing globally, it's possible to use the `--user` option to install packages for the current user only. Note that on many Linux/macOS systems, installing without `sudo` implies the `--user` option.
 - To protect packages which may also be installed by your system package manager (like `apt` for example), since Python 3.11 some systems require the `--break-system-packages` option, and that also with the `--user` option.
 
 ### Virtual environment
@@ -825,8 +826,8 @@ os.environ.get('VAR', 'default') # default if VAR not defined
 ```py
 from pathlib import Path
 p = Path('C:\\Windows')
-p = Path()     # rel. path from current dir
-p = Path.cwd() # abs. path from current dir
+p = Path()     # rel. path of current dir
+p = Path.cwd() # abs. path of current dir
 p.resolve()    # abs. physical path
 
 # Iterate
@@ -866,7 +867,7 @@ with open('./foo', 'w') as foofile:
 with open('foo') as foofile:
     sp.run(['tr', 'a-z', 'A-Z'], stdin=foofile)
 with open('foo.log', 'w') as logfile:
-    sp.run(['ls', 'foo bar baz'], stderr=logfile)
+    sp.run(['ls', 'foo', 'bar'], stderr=logfile)
 
 import psutil
 p = psutil.Process(pid)
