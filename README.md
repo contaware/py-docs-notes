@@ -512,6 +512,9 @@ The passed number of arguments must much the function definition, except for the
 
 ```py
 def my_calc(x, y):
+    # Make sure the passed args are numbers
+    assert isinstance(x, (int, float))
+    assert isinstance(y, (int, float))
     global num        # make num global
     num = 3
     z = 2 * x + y     # z is local to function
