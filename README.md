@@ -47,6 +47,7 @@ This document is a reference guide for Python programming. It is a bit more than
 - [Modules](#modules)
   - [Import](#import)
   - [Custom](#custom)
+  - [Direct run check](#direct-run-check)
 - [Packages](#packages)
   - [Use](#use)
   - [Manage](#manage)
@@ -632,11 +633,20 @@ print("Your number plus 1 is ", n)
 
 ### Custom
 
-Just create a Python file and import it without the `.py` extension:
+To make your own module just write a normal Python file and then import it without the `.py` extension:
 
 ```py
 import mymodule
 mymodule.myfunc("Hi")
+```
+
+### Direct run check
+
+To check whether a module is execute directly (without import):
+
+```py
+if __name__ == "__main__":
+    print("Running this module")
 ```
 
 
