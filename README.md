@@ -478,8 +478,9 @@ while i < 10:
 
 ### for
 
+We can loop over `str`, `list`, `tuple`, `set` and `dict`:
+
 ```py
-# Can loop over: str, list, tuple, set, dict
 for <variable> in <iterable>:
      <one or more indented statements>
 
@@ -488,23 +489,32 @@ for i in nums:
     print(i)
 ```
 
+- The statements to break out of a loop and to jump to the start are: `break` and `continue`
+
 The **range type** represents an immutable sequence of numbers used to loop:
 
 ```py
 range(count)                      # 0..(count - 1)
 range(start, end_exclusive)       # start..(end_exclusive - 1)
 range(start, end_exclusive, step) # range with step increments
-```
 
-The above for-loop example can be written like:
-
-```py
 nums = [1, 2, 3, 4, 5]
 for i in range(len(nums)):
     print(nums[i])
 ```
 
-The statements to break out of a loop and to jump to the start are: `break` and `continue`
+Looping through dictionaries (keys are placed in the loop variable by default):
+
+```py
+for k in mydict:
+    print(k, '->', mydict[k])
+
+for v in mydict.values():
+    print(v)
+
+for k, v in mydict.items():
+    print(k, '->', v)
+```
 
 
 ## Functions
