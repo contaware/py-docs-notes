@@ -458,7 +458,7 @@ person.update(person1)
 - Duplicate keys are not supported.
 - Keys can be any immutable data type.
 - Values can be any data type.
-- Python doesn't support dot notation to access a value like `dict.key`, you must use `dict[key]`.
+- Python doesn't support dot notation to access a value like `dict.key`, you must use `dict[key]`
 
 **Comprehensions**
 
@@ -535,7 +535,7 @@ for i in range(len(nums)):
     print(nums[i])
 ```
 
-Looping through dictionaries (keys are placed in the loop variable by default):
+Loop through dictionaries (keys are placed in the loop variable by default):
 
 ```py
 for k in mydict:
