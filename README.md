@@ -163,9 +163,9 @@ Python uses zero based indexing; negative indexing is allowed (-1 represents the
 
 ## Variables, immutability and mutability
 
-In Python all variables are objects, and the variable names are labels assigned to objects. Assigning variables is just like giving a new nickname, in `foo = bar = baz = 3` the variable names are just labels for the same object.
+In Python all variables are objects, and the variable names are **labels** assigned to objects. Assigning variables is just like giving a new nickname, in `foo = bar = baz = 3` the variable names are just labels for the same object.
 
-Thanks to **destructuring** it's possible to multiple assign variables on one line like `x, y = 5, 11`.
+Thanks to **destructuring** it's possible to multiple assign variables on one line: `x, y = 5, 11`. The expressions on the right side of the equal sign are all evaluated before any of the assignments take place: `a, b = b, a`. The assignment are then applied to the left side of the equal sign in left-to-right order: `i, x[i] = 1, 2`.
 
 The variable types are **dynamic** and determined at runtime. The objects are subdivide into two categories:
 
