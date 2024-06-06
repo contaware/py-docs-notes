@@ -404,12 +404,13 @@ even_numbers = [x for x in range(10) if x % 2 == 0]
 
 ```py
 t = ("tuples", "are", "immutable", "and", "are", "fast")
+t2 = "hello", 12 # parentheses not strictly required
 one = ("tuple",) # without the comma you get a string
 
 x = t[0]
 t.count("are") # return the count of "are"
 t.index("are")
-t3 = t + one   # combine tuples
+t3 = t + t2    # combine tuples
 ```
 
 ### Set (unordered collection of unique items)
