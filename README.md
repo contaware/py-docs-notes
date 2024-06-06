@@ -66,6 +66,7 @@ This document is a reference guide for Python programming. It is a bit more than
   - [Arguments](#arguments)
   - [Environment variables](#environment-variables)
   - [Path](#path)
+  - [Terminal](#terminal)
   - [Processes](#processes)
 
 
@@ -898,6 +899,19 @@ p.rmdir()
 import shutil
 shutil.copytree('src', 'dest') # recursive copy
 shutil.rmtree('a_dir')         # recursive delete
+```
+
+### Terminal
+
+```py
+# ANSI escapes
+print('\033[31mRED\033[0m')
+line, col = 15, 10
+print(f'\033[{line};{col}HFind Me!')
+
+import os
+term_size = os.get_terminal_size()
+print(term_size.columns, term_size.lines)
 ```
 
 ### Processes
