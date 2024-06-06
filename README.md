@@ -393,6 +393,8 @@ cities.sort(reverse=True)
 sorted(cities)          # return a new sorted list
 ```
 
+- It's not possible to append elements by assigning past the last index.
+
 **Comprehensions**
 
 ```py
