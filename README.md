@@ -406,14 +406,19 @@ even_numbers = [x for x in range(10) if x % 2 == 0]
 
 ```py
 t = ("tuples", "are", "immutable", "and", "are", "fast")
-t2 = "hello", 12 # parentheses not strictly required
-one = ("tuple",) # without the comma you get a string
+t2 = "hello", 12
+one = "tuple", # without the comma you get a string
 
 x = t[0]
 t.count("are") # return the count of "are"
 t.index("are")
 t3 = t + t2    # combine tuples
 ```
+
+- Python defines a tuple using commas, the parentheses can often be left out.
+- Use parentheses to avoid ambiguity with precedences.
+- Parentheses are required when passing a tuple as a function argument.
+- Parentheses are necessary to define the empty tuple: `()`
 
 ### Set (unordered collection of unique items)
 
