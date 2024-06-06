@@ -34,7 +34,7 @@ This document is a reference guide for Python programming. It is a bit more than
   - [List (ordered sequence of objects)](#list-ordered-sequence-of-objects)
   - [Tuple (immutable list)](#tuple-immutable-list)
   - [Set (unordered collection of unique items)](#set-unordered-collection-of-unique-items)
-  - [Dictionary (unordered collection accessed by key)](#dictionary-unordered-collection-accessed-by-key)
+  - [Dictionary (collection of key-value pairs)](#dictionary-collection-of-key-value-pairs)
 - [Conditions](#conditions)
   - [if](#if)
   - [pass statement](#pass-statement)
@@ -435,7 +435,7 @@ x.intersection(y) # return intersection as new set
 letters = {x for x in 'Hello World'} # no duplicates
 ```
 
-### Dictionary (unordered collection accessed by key)
+### Dictionary (collection of key-value pairs)
 
 ```py
 person = {"first_name" : "John",
@@ -453,6 +453,12 @@ del person["age"]                     # remove
 person1 = {"first_name" : "Jim", "country" : "USA"}
 person.update(person1)
 ```
+
+- Since Python 3.7 dictionaries are ordered.
+- Duplicate keys are not supported.
+- Keys can be any immutable data type.
+- Values can be any data type.
+- Python doesn't support dot notation to access a value like `dict.key`, you must use `dict[key]`.
 
 **Comprehensions**
 
