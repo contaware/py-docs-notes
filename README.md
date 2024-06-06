@@ -392,6 +392,13 @@ cities.sort(reverse=True)
 sorted(cities)          # return a new sorted list
 ```
 
+**Comprehensions**
+
+```py
+# newlist = [expression for item in iterable if condition == True]
+even_numbers = [x for x in range(10) if x % 2 == 0]
+```
+
 ### Tuple (immutable list)
 
 ```py
@@ -419,6 +426,13 @@ x.union(y)        # return union as new set
 x.intersection(y) # return intersection as new set
 ```
 
+**Comprehensions**
+
+```py
+# newset = {expression for item in iterable if condition == True}
+letters = {x for x in 'Hello World'} # no duplicates
+```
+
 ### Dictionary (unordered collection accessed by key)
 
 ```py
@@ -438,6 +452,16 @@ person1 = {"first_name" : "Jim", "country" : "USA"}
 person.update(person1)
 ```
 
+**Comprehensions**
+
+```py
+# newdict = {k: v for k in iterable if condition == True}
+power2 = {k: 2**k for k in range(4)}
+
+# newdict = {k: v for k, v in iterable if condition == True}
+mydict = {'a': 0, 'b': 1, 'c': 2, 'd': 3}
+newdict = {k: 2**v for k, v in mydict.items()}
+```
 
 ## Conditions
 
