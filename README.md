@@ -375,6 +375,7 @@ print(str(utf8_arr, 'utf-8'))
 cities = ["Vienna", "London", "Paris", 
           "Berlin", "Zurich", "Hamburg"]
 
+a, *mid, b = cities     # destructuring (mid is a list)
 cities[-1] = "New York" # replace last one
 cities.insert(i, "Bern")
 cities.pop(i)           # return & remove ith element
@@ -409,6 +410,7 @@ t = ("tuples", "are", "immutable", "and", "are", "fast")
 t2 = "hello", 12
 one = "tuple", # without the comma you get a string
 
+a, *mid, b = t # destructuring (mid is a list)
 x = t[0]
 t.count("are") # return the count of "are"
 t.index("are")
@@ -463,7 +465,7 @@ person.update(person1)
 
 - Since Python 3.7 dictionaries are ordered.
 - Duplicate keys are not supported.
-- Keys can be any immutable data type.
+- Keys can be any immutable data type (for that reason we cannot do destructuring like in javascript).
 - Values can be any data type.
 - Python doesn't support dot notation to access a value like `dict.key`, you must use `dict[key]`
 
