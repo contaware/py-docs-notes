@@ -515,24 +515,24 @@ newdict = {k: 2**v for k, v in mydict.items()}
 ### if
 
 ```py
-if <condition>:
-    <one or more indented statements>
-elif <condition>:
+if condition1:
+    print("One or more statements")
+elif condition2:
     pass # use pass statement to do nothing
 else:
-    <one or more indented statements>
+    print("One or more statements")
 ```
 
 ### match-case
 
 ```py
 match subject:
-    case <pattern1>:
-        <one or more indented statements>
-    case <pattern2a> | <pattern2b>:  # or
-        <one or more indented statements>
+    case pattern1:
+        print("One or more statements")
+    case pattern2a | pattern2b:  # or
+        print("One or more statements")
     case _:  # default
-        <one or more indented statements>
+        print("One or more statements")
 ```
 
 ### try-except
@@ -556,8 +556,8 @@ finally:
 ### while
 
 ```py
-while <condition>:
-    <one or more indented statements>
+while condition:
+    print("One or more statements")
 else:
     print("Completed without break being called")
 
@@ -574,8 +574,8 @@ while i < 10:
 We can loop over `str`, `list`, `tuple`, `set` and `dict`:
 
 ```py
-for <variable> in <iterable>:
-    <one or more indented statements>
+for var in iterable:
+    print("One or more statements")
 else:
     print("Completed without break being called")
 
