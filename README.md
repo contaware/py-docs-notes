@@ -22,6 +22,7 @@ This document is a reference guide for Python programming. It is a bit more than
   - [Slicing](#slicing)
   - [For mutable types `a += b` is not the same as `a = a + b`](#for-mutable-types-a--b-is-not-the-same-as-a--a--b)
 - [Length](#length)
+- [Print and input](#print-and-input)
 - [Basic types](#basic-types)
   - [NoneType](#nonetype)
   - [Integers](#integers)
@@ -43,7 +44,6 @@ This document is a reference guide for Python programming. It is a bit more than
   - [for](#for)
 - [Functions](#functions)
 - [Classes](#classes)
-- [Input](#input)
 - [Modules](#modules)
   - [Import](#import)
   - [Custom](#custom)
@@ -253,6 +253,19 @@ len(obj)
 ```
 
 - It calls the obj's `__len__()` method.
+
+
+## Print and input
+
+```py
+print("No newline yet/", end="")
+print("line", "continuation", sep="-")
+```
+
+```py
+n = input("Enter a number: ") # returns a string
+print("Your number plus 1 is", int(n) + 1)
+```
 
 
 ## Basic types
@@ -670,15 +683,6 @@ class Asteroid(Point):
 a1 = Asteroid(0, 0)
 a2 = Asteroid(3, 4)
 print(a1.compute_distance(a2))
-```
-
-
-## Input
-
-```py
-n = input("Enter a number: ") # returns a string
-n = int(n) + 1
-print("Your number plus 1 is ", n)
 ```
 
 
