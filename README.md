@@ -38,7 +38,8 @@ This document is a reference guide for Python programming. It is a bit more than
   - [Dictionary (collection of key-value pairs)](#dictionary-collection-of-key-value-pairs)
 - [Conditions](#conditions)
   - [if](#if)
-  - [pass statement](#pass-statement)
+  - [match-case](#match-case)
+  - [try-except](#try-except)
 - [Loops](#loops)
   - [while](#while)
   - [for](#for)
@@ -508,6 +509,7 @@ mydict = {'a': 0, 'b': 1, 'c': 2, 'd': 3}
 newdict = {k: 2**v for k, v in mydict.items()}
 ```
 
+
 ## Conditions
 
 ### if
@@ -516,18 +518,36 @@ newdict = {k: 2**v for k, v in mydict.items()}
 if <condition>:
     <one or more indented statements>
 elif <condition>:
-    <one or more indented statements>
+    pass # use pass statement to do nothing
 else:
     <one or more indented statements>
 ```
 
-### pass statement
+### match-case
 
 ```py
-if <condition>:
-    pass   # do nothing
+match subject:
+    case <pattern1>:
+        <one or more indented statements>
+    case <pattern2a> | <pattern2b>:  # or
+        <one or more indented statements>
+    case _:  # default
+        <one or more indented statements>
+```
+
+### try-except
+
+```py
+try:
+    raise Exception("Bad")
+except ZeroDivisionError:
+    print("You are dividing by zero")
+except Exception as e:
+    print(e)
 else:
-    do_something()
+    print("Runs if no exception")
+finally:
+    print("Runs always")
 ```
 
 
