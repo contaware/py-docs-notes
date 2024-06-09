@@ -547,6 +547,8 @@ while i < 10:
     i += 1
 ```
 
+- Use `break` to break out of the loop and `continue` to jump to the start.
+
 ### for
 
 We can loop over `str`, `list`, `tuple`, `set` and `dict`:
@@ -562,7 +564,7 @@ for i in nums:
     print(i)
 ```
 
-- The statements to break out of a loop and to jump to the start are: `break` and `continue`
+- Use `break` to break out of the loop and `continue` to jump to the start.
 
 The **range type** represents an immutable sequence of numbers used to loop:
 
