@@ -167,6 +167,8 @@ In Python all variables are objects, and the variable names are **labels** assig
 
 Thanks to **destructuring** it's possible to multiple assign variables on one line: `x, y = 5, 11`. The expressions on the right side of the equal sign are all evaluated before any of the assignments take place: `a, b = b, a`. The assignment are then applied to the left side of the equal sign in left-to-right order: `i, x[i] = 1, 2`.
 
+By convention the `_` variable is used as a placeholder/throwaway variable in for-loops or when destructuring, and in the interactive shell it stores the last expression value.
+
 The variable types are **dynamic** and determined at runtime. The objects are subdivide into two categories:
 
 1. **Immutable** are objects whose internal state/values can't be changed or altered:
