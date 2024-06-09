@@ -419,6 +419,7 @@ list(reversed(cities))  # return a new reversed list
 cities.sort()           # sort in-place
 cities.sort(reverse=True)
 sorted(cities)          # return a new sorted list
+zip(list1, list2)       # return a new tuple list
 ```
 
 - It's not possible to append elements by assigning past the last index.
