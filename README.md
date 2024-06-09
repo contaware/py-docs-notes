@@ -537,6 +537,8 @@ else:
 ```py
 while <condition>:
     <one or more indented statements>
+else:
+    print("Completed without break being called")
 
 i = 0
 while i < 10:
@@ -550,7 +552,9 @@ We can loop over `str`, `list`, `tuple`, `set` and `dict`:
 
 ```py
 for <variable> in <iterable>:
-     <one or more indented statements>
+    <one or more indented statements>
+else:
+    print("Completed without break being called")
 
 nums = [1, 2, 3, 4, 5]
 for i in nums:
