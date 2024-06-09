@@ -526,7 +526,7 @@ else:
 ### match-case
 
 ```py
-match subject:
+match var:
     case pattern1:
         print("One or more statements")
     case pattern2a | pattern2b:  # or
