@@ -302,7 +302,7 @@ converted = bool(0) # False
 
 ### Strings
 
-Strings can either be single-quoted or double-quoted and can contain backslash escapes like `\\`  `\'`  `\"`  `\r` `\n` `\t`. Use `\ooo` for the octal character `ooo` and `\xhh` for the hex character `hh`. Unicode characters are represented with `\uxxxx` or `\Uxxxxxxxx`. Strings prefixed with `r` or `R` are raw strings which treat backslashes as literal characters.
+Strings can either be single-quoted or double-quoted and can contain backslash escapes like `\\`  `\'`  `\"`  `\r` `\n` `\t`. Use `\ooo` for the octal character `ooo` and `\xhh` for the hex character `hh`. Unicode characters are represented with `\uxxxx` or `\Uxxxxxxxx`. Strings prefixed with `r` or `R` are raw strings which treat backslashes as literal characters. Strings prefixed by `f` or `F` are f-strings which allow embedding expressions inside string literals. It's also possible to combine the prefixes to get raw f-strings.
 
 To have a string span multiple lines, place a backslash at the end of the lines or to have the newlines in the string, surround in triple-quotes.
 
@@ -321,10 +321,22 @@ line2"""
 String formatting:
 
 ```py
-val1, val2 = "two", "in"
-f"text with {val1} placeholders {val2} it"
-"text with {} placeholders {} it".format(val1, val2)
-"{:04d},{:4d},{:6.2f}".format(123, 453, 59.058)
+val1, num1, num2 = "one", 123, 59.058
+width, precision = 6, 1
+print(f"_{val1:5}_")     # left-aligned
+print(f"_{val1:>5}_")    # do right-align
+print(f"_{val1:^5}_")    # do center-align
+print(f"_{num1:5d}_")    # right-aligned
+print(f"_{num1:<5d}_")   # do left-align
+print(f"{num1:05d}")     # zero-fill
+print(f"0x{num1:04x}")   # zero-fill hex
+print(f"_{num2:7.2f}_")  # right-aligned
+print(f"_{num2:<7.2f}_") # do left-align
+print(f"_{num2:{width}.{precision}f}_")
+print(f"_{num1+num2:.0f}_")
+
+# Double the braces to escape them
+print(f"{{foo}}")
 ```
 
 String manipulation:
