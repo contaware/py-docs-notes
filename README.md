@@ -160,7 +160,7 @@ Code blocks are always preceded by a colon on the previous line. You should be a
 
 It's possible to continue expressions on the next line if within parentheses. Also the initializations of the collection types can span multiple lines.
 
-Python uses zero based indexing; negative indexing is allowed (-1 represents the last element).
+Python uses zero based indexing; negative indexing is allowed, `-1` is the index of the last element, `-2` the second-to-last and so on.
 
 
 ## Variables, immutability and mutability
