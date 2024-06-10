@@ -78,8 +78,9 @@ This document is a reference guide for Python programming. It is a bit more than
 To see whether Python is already installed, in your terminal run:
 
 ```
-python --version   # on Windows
 python3 --version  # on Linux and macOS
+py --version       # on Windows with py-launcher
+python --version   # on Windows
 ```
 
 To verify that your script is running with the wanted version:
