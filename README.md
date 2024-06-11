@@ -793,6 +793,8 @@ Packages are a way of structuring the module namespace by using "dotted module n
 
 ### Manage
 
+To search for a package use [pypi.org/search](https://pypi.org/search/).
+
 The Python Package Manager (pip) should be called through the correct Python version:
 
 - Linux/macOS: `python3 -m pip ...`
@@ -804,10 +806,12 @@ Typical commands (invoke `pip` like shown above):
 pip list -v
 pip show <pkg>
 pip install <pkgs>
+pip install --dry-run <pkgs>
 pip install --upgrade <pkgs>
 pip uninstall <pkgs>
 ```
 
+- The `pip` package names aren't case sensitive.
 - Instead of installing globally, it's possible to use the `--user` option to install packages for the current user only. Note that on many Linux/macOS systems, installing without `sudo` implies the `--user` option.
 - To protect packages which may also be installed by your system package manager (like `apt` for example), since Python 3.11 some systems require the `--break-system-packages` option, and that also with the `--user` option.
 
