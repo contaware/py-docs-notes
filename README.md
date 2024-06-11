@@ -362,21 +362,23 @@ String manipulation:
 text.upper()
 text.lower()
 text.count(sub)
-text.strip()  # trim whitespaces
-text.lstrip() # trim left whitespaces
-text.rstrip() # trim right whitespaces
-text.find(sub)
-text.rfind(sub)
-"1,2,3".split(",") # ['1', '2', '3']
-text.replace(old, new)
+text.strip()    # trim whitespaces
+text.lstrip()   # trim left whitespaces
+text.rstrip()   # trim right whitespaces
+sub in text     # return True or False
+text.find(sub)  # return index (-1 if not found)
+text.rfind(sub) # return index of last one
+"1,2,3".split(",")     # return a list
+text.replace(old, new) # replace all
 ```
 
 Regular expression operations, use raw strings to avoid interpreting backslashes:
 
 ```py
 import re
-re.split(r'[^a-zA-Z]', text)
-re.sub(r'pattern', r'replacement', text)
+re.search(r'pattern', text)  # return first as Match or None
+re.split(r'[^a-zA-Z]', text) # return a list
+re.sub(r'pattern', r'replacement', text) # replace all
 ```
 
 ### Bytes and bytearray
