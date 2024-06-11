@@ -866,11 +866,16 @@ It's possible to create an isolated Python installation with separate packages f
 ### Examples of packages
 
 - App frameworks: `kivy` `pyqt` `tkinter`
-- Parsers: `configparser` `csv` `xml` `json`
+- Web frameworks: `django` `flask`
+- CLI frameworks: `click` `rich` `pyfiglet`
+- Config: `configparser` `xml` `json`
+- Text: `csv` `pypdf`
+- Develop: `loguru` `python-dotenv` `pytest`
 - Multimedia: `audioflux` `pillow` `moviepy` `opencv` `simplecv`
 - Games: `pygame` `pyglet`
-- Network: `requests` `scrapy` `twisted`
-- Math: `pandas` `numpy` `scipy` `sympy` `matplotlib` `plotly`
+- Network: `requests` `httpx` `scrapy` `beautifulsoup` `twisted`
+- Math: `pandas` `numpy` `scipy` `sympy` `matplotlib` `plotly` `seaborn`
+- Machine learning: `scikit-learn` `tensorflow` `keras` `pytorch`
 
 
 ## Date/Time
