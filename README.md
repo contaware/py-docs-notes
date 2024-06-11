@@ -332,6 +332,18 @@ converted = bool(1) # True
 converted = bool(0) # False
 ```
 
+```py
+# - True if all are True
+# - True for an empty iterable
+all(iterable)
+```
+
+```py
+# - True if at least one is True
+# - False for an empty iterable
+any(iterable)
+```
+
 ### Strings
 
 Strings can either be single-quoted or double-quoted and can contain backslash escapes like `\\`  `\'`  `\"`  `\r` `\n` `\t`. Use `\ooo` for the octal character `ooo` and `\xhh` for the hex character `hh`. Unicode characters are represented with `\uxxxx` or `\Uxxxxxxxx`. Strings prefixed with `r` or `R` are raw strings which treat backslashes as literal characters. Strings prefixed by `f` or `F` are f-strings which allow embedding expressions inside string literals. It's also possible to combine the prefixes to get raw f-strings.
