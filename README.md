@@ -21,8 +21,8 @@ This document is a reference guide for Python programming. It is a bit more than
   - [Membership](#membership)
   - [Slicing](#slicing)
   - [For mutable types `a += b` is not the same as `a = a + b`](#for-mutable-types-a--b-is-not-the-same-as-a--a--b)
-- [Length](#length)
-- [Print and input](#print-and-input)
+- [len, min, max](#len-min-max)
+- [print, input](#print-input)
 - [Basic types](#basic-types)
   - [NoneType](#nonetype)
   - [Integers](#integers)
@@ -250,16 +250,31 @@ s[start:end_exclusive:step] # extract from start till end_exclusive
 When the `+=` operator is used on an object which has `__iadd__` (in-place addition) defined, the object is modified in place. Otherwise it will instead use `__add__` and return a new object. Mutable types have `__iadd__`, whereas immutable ones only have `__add__`.
 
 
-## Length
+## len, min, max
 
 ```py
+# It calls obj's __len__() method
 len(obj)
 ```
 
-- It calls the obj's `__len__()` method.
+```py
+# Order numerically/alphabetically
+smallest = min(iterable)
+
+# Order by len()
+shortest_word = min(iterable, key=len)
+```
+
+```py
+# Order numerically/alphabetically
+largest = max(iterable)
+
+# Order by len()
+longest_word = max(iterable, key=len)
+```
 
 
-## Print and input
+## print, input
 
 ```py
 print("No newline yet/", end="")
