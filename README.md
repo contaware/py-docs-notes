@@ -452,6 +452,9 @@ cities.sort()           # sort in-place
 cities.sort(reverse=True)
 sorted(cities)          # return a new sorted list
 zip(list1, list2)       # return a new tuple list
+
+# Constructor
+l1 = list(iterable)
 ```
 
 - It's not possible to append elements by assigning past the last index.
@@ -468,7 +471,7 @@ even_numbers = [x for x in range(10) if x % 2 == 0]
 ```py
 t = ("tuples", "are", "immutable", "and", "are", "fast")
 t2 = "hello", 12
-one = "tuple", # without the comma you get a string
+one = "solo",  # without the comma you get a string
 
 a, *mid, b = t # destructuring (mid is a list)
 t = a, *mid, b # destructuring (mid to elements)
@@ -476,6 +479,9 @@ x = t[0]
 t.count("are") # return the count of "are"
 t.index("are")
 t3 = t + t2    # combine tuples
+
+# Constructor
+t4 = tuple(iterable)
 ```
 
 - Python defines a tuple using commas, the parentheses can often be left out.
@@ -496,6 +502,9 @@ y.discard("a")    # remove if present
 x.difference(y)   # return difference as new set
 x.union(y)        # return union as new set
 x.intersection(y) # return intersection as new set
+
+# Constructor
+z = set(iterable)
 ```
 
 **Comprehensions**
@@ -523,6 +532,11 @@ del person["age"]                     # remove
 person1 = {**person,
            "first_name" : "Jim",
            "country" : "USA"}
+
+# Constructor
+d1 = dict(a=1, b=2, c=3)              # named args
+d2 = dict([('a',1),('b',2),('c',3)])  # iterable
+d3 = dict(iterable, d=4, e=5)         # named args at end
 ```
 
 - Since Python 3.7 dictionaries are ordered.
