@@ -457,13 +457,12 @@ print(str(utf8_arr, 'utf-8'))
 cities = ["Vienna", "London", "Paris", 
           "Berlin", "Zurich", "Hamburg"]
 
-a, *mid, b = cities     # unpacking + packing to mid
-cities = [a, *mid, b]   # unpacking mid to elements
 cities[-1] = "New York" # replace last one
 cities.insert(i, "Bern")
 cities.pop(i)           # return & remove ith element
 cities.pop(-1)          # pop last one, same as pop()
 cities.append("Locarno")
+print(cities + other)   # combine lists
 cities.extend(other)    # append other list
 cities.remove("Berlin") # remove first occurrence
 cities.clear()          # clear all
@@ -476,6 +475,10 @@ cities.sort()           # sort in-place
 cities.sort(reverse=True)
 sorted(cities)          # return a new sorted list
 zip(list1, list2)       # return a new tuple list
+
+# Unpack/pack
+a, *mid, b = cities     # unpack + pack to mid
+cities = [a, *mid, b]   # unpack mid to elements
 
 # Constructor
 l1 = list(iterable)
@@ -499,12 +502,14 @@ t = ("tuples", "are", "immutable", "and", "are", "fast")
 t2 = "hello", 12
 one = "solo",  # without the comma you get a string
 
-a, *mid, b = t # unpacking + packing to mid
-t = a, *mid, b # unpacking mid to elements
 x = t[0]
 t.count("are") # return the count of "are"
 t.index("are")
 t3 = t + t2    # combine tuples
+
+# Unpack/pack
+a, *mid, b = t # unpack + pack to mid
+t = a, *mid, b # unpack mid to elements
 
 # Constructor
 t4 = tuple(iterable)
