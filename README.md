@@ -583,7 +583,11 @@ power2 = {k: 2**k for k in range(4)}
 
 # newdict = {k: v for k, v in iterable if condition == True}
 mydict = {'a': 0, 'b': 1, 'c': 2, 'd': 3}
-newdict = {k: 2**v for k, v in mydict.items()}
+power2 = {k: 2**v for k, v in mydict.items()}
+
+# newlist = [(k, v) for k, v in iterable if condition == True]
+letter_pairs = {'a': 'A', 'b': 'B', 'c': 'C'}
+tuple_list = [(k, v) for k, v in letter_pairs.items()]
 ```
 
 
