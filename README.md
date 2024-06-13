@@ -675,10 +675,13 @@ for i in range(len(nums)):
     print(nums[i])
 ```
 
-Loop through dictionaries (keys are placed in the loop variable by default):
+Loop through dictionaries:
 
 ```py
+# Iterating over keys is the default
 for k in mydict:
+    print(k, '->', mydict[k])
+for k in mydict.keys():
     print(k, '->', mydict[k])
 
 for v in mydict.values():
