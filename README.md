@@ -19,6 +19,7 @@ This document is a reference guide for Python programming. It is a bit more than
   - [Division](#division)
   - [Chaining](#chaining)
   - [Membership](#membership)
+  - [Unpacking/packing](#unpackingpacking)
   - [Slicing](#slicing)
   - [For mutable types `a += b` is not the same as `a = a + b`](#for-mutable-types-a--b-is-not-the-same-as-a--a--b)
 - [len, min, max](#len-min-max)
@@ -167,9 +168,7 @@ Python uses zero based indexing; negative indexing is allowed, `-1` is the index
 
 In Python all variables are objects, and the variable names are **labels** assigned to objects. Assigning variables is just like giving a new nickname, in `foo = bar = baz = 3` the variable names are just labels for the same object.
 
-Thanks to **destructuring** it's possible to multiple assign variables on one line: `x, y = 5, 11`. The expressions on the right side of the equal sign are all evaluated before any of the assignments take place: `a, b = b, a`. The assignment are then applied to the left side of the equal sign in left-to-right order: `i, x[i] = 1, 2`.
-
-By convention the `_` variable is used as a placeholder/throwaway variable in for-loops or when destructuring, and in the interactive shell it stores the last expression value.
+By convention the `_` variable is used as a placeholder/throwaway variable in for-loops or when unpacking, and in the interactive shell it stores the last expression value.
 
 The variable types are **dynamic** and determined at runtime. The objects are subdivide into two categories:
 
@@ -232,6 +231,31 @@ abc = ["a","b","c","d","e"]
 "a" in abc       # True
 "a" not in abc   # False
 ```
+
+### Unpacking/packing
+
+Unpacking is the operation of extracting data from a structured type into distinct variables. The opposite operation is termed packing. In some programming languages instead of unpacking we speak of destructuring. Unpacking happens automatically when **assigning an iterable to a tuple/list of variables**.
+
+The most common application of unpacking is to multiple assign variables on one line: `x, y = 5, 11`. The expressions on the right side of the equal sign are all evaluated before any of the assignments take place: `a, b = b, a`. The assignment are then applied to the left side of the equal sign in left-to-right order: `i, x[i] = 1, 2`.
+
+There are situations where we need to explicitly trigger unpacking/packing:
+
+- The `*` operator in front of an iterable performs unpacking when reading the iterable and packing when writing into it.
+- The `**` operator in front of a dictionary performs unpacking when reading the dictionary and packing when writing into it.
+
+The following example illustrates where unpacking and packing happen:
+
+```py
+list1 = [1, 2, 3]
+c = 4
+d = 5
+[a, b, *list2] = [*list1, c, d]
+```
+
+1. The `[*list1, c, d]` list is created from the unpacked `list1`, `c` and `d`.
+2. The assignment operation unpacks the right-hand side list into elements.
+3. The first two elements get assigned to `a` and `b`.
+4. The remaining elements are packed into `list2`.
 
 ### Slicing
 
@@ -433,8 +457,8 @@ print(str(utf8_arr, 'utf-8'))
 cities = ["Vienna", "London", "Paris", 
           "Berlin", "Zurich", "Hamburg"]
 
-a, *mid, b = cities     # destructuring (mid is a list)
-cities = [a, *mid, b]   # destructuring (mid to elements)
+a, *mid, b = cities     # unpacking + packing to mid
+cities = [a, *mid, b]   # unpacking mid to elements
 cities[-1] = "New York" # replace last one
 cities.insert(i, "Bern")
 cities.pop(i)           # return & remove ith element
@@ -468,13 +492,15 @@ even_numbers = [x for x in range(10) if x % 2 == 0]
 
 ### Tuple (immutable list)
 
+Python defines a tuple with commas, the parentheses can usually be left out (see the exceptions below):
+
 ```py
 t = ("tuples", "are", "immutable", "and", "are", "fast")
 t2 = "hello", 12
 one = "solo",  # without the comma you get a string
 
-a, *mid, b = t # destructuring (mid is a list)
-t = a, *mid, b # destructuring (mid to elements)
+a, *mid, b = t # unpacking + packing to mid
+t = a, *mid, b # unpacking mid to elements
 x = t[0]
 t.count("are") # return the count of "are"
 t.index("are")
@@ -484,7 +510,6 @@ t3 = t + t2    # combine tuples
 t4 = tuple(iterable)
 ```
 
-- Python defines a tuple using commas, the parentheses can often be left out.
 - Use parentheses to avoid ambiguity with precedences.
 - Parentheses are required when passing a tuple as a function argument.
 - Parentheses are necessary to define the empty tuple: `()`
@@ -527,7 +552,7 @@ person["email"] = "jim.doe@gmail.com" # add
 y = person.pop("email")               # return & remove
 del person["age"]                     # remove
 
-# Destructure and merge
+# Unpack and merge
 # (values with the same key are overwritten)
 person1 = {**person,
            "first_name" : "Jim",
@@ -684,7 +709,7 @@ def default_arg(name="everybody"):
 print(default_arg())
 ```
 
-Varargs implemented with tuples:
+Varargs implemented with tuple packing:
 
 ```py
 def my_min(*args): # args is a name of your choice
@@ -696,7 +721,7 @@ def my_min(*args): # args is a name of your choice
 my_min(4, 5, 6, 7, 2)
 ```
 
-Key-worded varargs implemented with dictionaries:
+Key-worded varargs implemented with dictionary packing:
 
 ```py
 def my_func(**kwargs): # kwargs is a name of your choice
