@@ -958,6 +958,10 @@ print(type(json_str2), json_str2)
 
 ### Read file
 
+By default a file is opened in read and text mode. Open with the `encoding='utf-8'` argument to make sure utf-8 is used on all systems.
+
+To open a file in binary mode use `'rb'`.
+
 ```py
 my_file = open('my_file.txt')    # default mode is 'r'
 for line in my_file:
@@ -972,8 +976,12 @@ my_file.close()
 
 ### Write file
 
+The write mode is `'w'`, and the append mode is `'a'`; for both cases the file is written in text mode. By default the line ending is automatically converted depending from the system. To always use a specific line ending open with the `newline='\n'` argument. Open with the `encoding='utf-8'` argument to make sure utf-8 is used on all systems.
+
+To open a file in binary mode use `'wb'` or `'ab'`.
+
 ```py
-my_file = open('my_file.txt', 'w')  # use 'a' to append
+my_file = open('my_file.txt', 'w')
 my_file.write('some text\n')
 print('another line', file=my_file) # print adds a newline
 my_file.close()
