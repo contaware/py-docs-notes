@@ -946,11 +946,14 @@ print(now.strftime('%d.%m.%Y %H:%M:%S'))
 ```py
 import json
 json_str = '{"first_name": "John", "last_name": "Doe", "age": 30}'
-print(type(json_str), json_str)
-user = json.loads(json_str)            # str -> dict
-print(type(user), user)
-json_str2 = json.dumps(user, indent=2) # dict -> str
-print(type(json_str2), json_str2)
+
+# json str -> dict
+user = json.loads(json_str)
+print(user)
+
+# dict -> json str
+json_str2 = json.dumps(user, indent=2)
+print(json_str2)
 ```
 
 
