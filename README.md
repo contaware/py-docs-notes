@@ -1032,6 +1032,9 @@ p = Path()     # rel. path of current dir
 p = Path.cwd() # abs. path of current dir
 p.resolve()    # abs. physical path
 
+# Script dir & path join operator /
+p = Path(__file__).resolve().parent / 'test.txt'
+
 # Iterate
 for i in sorted(p.iterdir(), reverse = True):
     print(i)
