@@ -933,11 +933,25 @@ It's possible to create an isolated Python installation with separate packages f
 
 ```py
 import datetime
-now = datetime.datetime.now()
-past = datetime.datetime(2018, 8, 18, 10, 5, 56, 518515)
-print(now)
-print(past)
-print(now.strftime('%d.%m.%Y %H:%M:%S'))
+
+# Now
+now = datetime.datetime.now() # local time
+now_utc = datetime.datetime.now(datetime.UTC)
+
+# Construct local time
+print(datetime.datetime(2018, 8, 18, 10, 5, 56, 518515))
+
+# Format
+print(now.strftime("%d.%m.%Y %H:%M:%S"))
+print(now_utc.isoformat(timespec='seconds'))
+
+# Time delta
+# days seconds microseconds milliseconds minutes hours weeks
+print(now + datetime.timedelta(hours=1, seconds=1))
+
+# Unix timestamp
+ts = now.timestamp()
+print(ts, datetime.datetime.fromtimestamp(ts))
 ```
 
 
