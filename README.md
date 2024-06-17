@@ -945,7 +945,7 @@ print(datetime.datetime(2018, 8, 18, 10, 5, 56, 518515))
 print(now.strftime("%d.%m.%Y %H:%M:%S"))
 print(now_utc.isoformat(timespec='seconds'))
 
-# Time delta
+# Time delta (uses wall clock time semantics)
 # days seconds microseconds milliseconds minutes hours weeks
 print(now + datetime.timedelta(hours=1, seconds=1))
 
