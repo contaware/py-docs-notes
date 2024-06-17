@@ -949,7 +949,7 @@ print(now_utc.isoformat(timespec='seconds'))
 # days seconds microseconds milliseconds minutes hours weeks
 print(now + datetime.timedelta(hours=1, seconds=1))
 
-# Unix timestamp
+# Unix/POSIX timestamp
 ts = now.timestamp()
 print(ts, datetime.datetime.fromtimestamp(ts))
 ```
