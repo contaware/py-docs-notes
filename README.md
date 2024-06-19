@@ -57,6 +57,7 @@ This document is a reference guide for Python programming. It is a bit more than
     - [Linux/macOS](#linuxmacos)
     - [Windows](#windows-1)
   - [Examples of packages](#examples-of-packages)
+- [Math](#math)
 - [Date/Time](#datetime)
 - [JSON](#json)
 - [I/O and processes](#io-and-processes)
@@ -325,6 +326,8 @@ x is not None # False
 
 ```py
 cost = 1_000  # thousands separator
+converted = int("12")
+from_hex = int("3f", 16) # base 16
 truncate = int(12.92)
 absolute_value = abs(-1)
 ```
@@ -927,6 +930,33 @@ It's possible to create an isolated Python installation with separate packages f
 - Network: `requests` `httpx` `scrapy` `beautifulsoup` `twisted`
 - Math: `pandas` `numpy` `scipy` `sympy` `matplotlib` `plotly` `seaborn`
 - Machine learning: `scikit-learn` `tensorflow` `keras` `pytorch`
+
+
+## Math
+
+```py
+import math
+import sys
+
+# Math functions
+print(math.sin(math.pi/2))
+print(math.sqrt(81))
+print(math.log(math.e))       # default base is e
+print(math.log(10, 10))       # 2nd arg is base
+
+# Not a number
+x = float('nan')              # or: math.nan
+print(math.isnan(x))
+print(math.isfinite(x))       # True if not inf and not nan
+print(math.inf/math.inf)      # nan
+
+# Infinity
+pos_inf = float('inf')        # or: math.inf
+neg_inf = float('-inf')       # or: -math.inf
+print(math.isinf(pos_inf))    # True if positive or negative inf
+print(math.isfinite(neg_inf)) # True if not inf and not nan
+print(sys.float_info.max*10)  # inf
+```
 
 
 ## Date/Time
