@@ -704,7 +704,9 @@ for k, v in mydict.items():
 
 ### iter
 
-An **iterator** object is initialized with a `iter()` call on an iterable object (list, tuple, dict, set, str, range). The iterator has the `next()` method for iteration. This method raises a `StopIteration` to signal the end of the iteration.
+An **iterator** object gets created when calling `iter()` on an iterable object (list, tuple, dict, set, str, range). The iterator has the `next()` method for iteration. Iterators are stateful, once an item is consumed it's gone. The `next()` method raises a `StopIteration` to signal the end of the iteration. An iterator that has been fully consumed is termed **exhausted**.
+
+Iterables are able to be iterated over and iterators are the agents that perform the iteration. All iterators are also iterables because calling `iter()` on an iterator will give itself back.
 
 ```py
 animals = ["dog", "cat", "snake"]
