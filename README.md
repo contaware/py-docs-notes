@@ -711,6 +711,11 @@ Iterables are able to be iterated over and iterators are the agents that perform
 ```py
 animals = ["dog", "cat", "snake"]
 
+# That works because iterators are also iterables
+iter_animals = iter(animals)
+for item in iter_animals:
+    print(item)
+
 # That works if None is not in array
 iter_animals = iter(animals)
 while (item := next(iter_animals, None)) is not None:
