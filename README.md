@@ -673,7 +673,7 @@ for i in nums:
 
 - Use `break` to break out of the loop and `continue` to jump to the start.
 
-The **range type** represents an immutable iterable sequence of numbers:
+The **range type** represents an immutable iterable sequence of numbers which has a length and can be indexed/sliced:
 
 ```py
 range(count)                      # 0..(count - 1)
