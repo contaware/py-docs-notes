@@ -44,6 +44,7 @@ This document is a reference guide for Python programming. It is a bit more than
 - [Loops](#loops)
   - [while](#while)
   - [for](#for)
+  - [iter](#iter)
 - [Functions](#functions)
 - [Classes](#classes)
 - [Modules](#modules)
@@ -672,7 +673,7 @@ for i in nums:
 
 - Use `break` to break out of the loop and `continue` to jump to the start.
 
-The **range type** represents an immutable sequence of numbers used to loop:
+The **range type** represents an immutable iterable sequence of numbers:
 
 ```py
 range(count)                      # 0..(count - 1)
@@ -698,6 +699,50 @@ for v in mydict.values():
 
 for k, v in mydict.items():
     print(k, '->', v)
+```
+
+
+### iter
+
+An **iterator** object is initialized with a `iter()` call on an iterable object (list, tuple, dict, set, str, range). The iterator has the `next()` method for iteration. This method raises a `StopIteration` to signal the end of the iteration.
+
+```py
+animals = ["dog", "cat", "snake"]
+
+# That works if None is not in array
+iter_animals = iter(animals)
+while (item := next(iter_animals, None)) is not None:
+    print(item)
+
+# That's what a for-loop internally does
+iter_animals = iter(animals)
+while True:
+    try:
+        item = next(iter_animals)
+        print(item)
+    except StopIteration:
+        break
+```
+
+**Generator functions** have `yield` statement(s) and automatically return an iterator:
+
+```py
+def my_gen_func(x):
+    yield 1
+    yield 2
+    yield x * x
+
+iter_nums = my_gen_func(2)
+while (num := next(iter_nums, None)) is not None:
+    print(num)
+```
+
+**Generator expressions** are in parentheses and evaluate to an iterator:
+
+```py
+iter_range = (n for n in range(3, 5))
+while (num := next(iter_range, None)) is not None:
+    print(num)
 ```
 
 
