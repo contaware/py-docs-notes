@@ -61,6 +61,7 @@ This document is a reference guide for Python programming. It is a bit more than
 - [Math](#math)
 - [Date/Time](#datetime)
 - [JSON](#json)
+- [Jupyter](#jupyter)
 - [I/O and processes](#io-and-processes)
   - [Read file](#read-file)
   - [Write file](#write-file)
@@ -1053,6 +1054,25 @@ print(user)
 json_str2 = json.dumps(user, indent=2)
 print(json_str2)
 ```
+
+
+## Jupyter
+
+Jupyter is a web based interactive IDE for writing code in cells. Each cell's output is stored in source file with its code.
+
+Install:
+
+```py
+pip install jupyter
+```
+
+Launch notebook web server:
+
+```py
+jupyter notebook
+```
+
+- To browser another location use the `--notebook-dir` option or change the terminal directory before launching the notebook.
 
 
 ## I/O and processes
