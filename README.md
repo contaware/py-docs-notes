@@ -979,7 +979,7 @@ It's possible to create an isolated Python installation with separate packages f
 - Config: `configparser` `xml` `json`
 - Text: `csv` `pypdf`
 - Develop: `loguru` `python-dotenv` `pytest`
-- Multimedia: `audioflux` `pillow` `moviepy` `opencv` `simplecv`
+- Multimedia: `audioflux` `pillow` `moviepy` `opencv` `simplecv` `scikit-image`
 - Games: `pygame` `pyglet`
 - Network: `requests` `httpx` `scrapy` `beautifulsoup` `twisted`
 - Math: `pandas` `numpy` `scipy` `sympy` `matplotlib` `plotly` `seaborn`
