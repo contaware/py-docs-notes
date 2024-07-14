@@ -1074,6 +1074,8 @@ jupyter notebook
 
 - To browser another location use the `--notebook-dir` option or change the terminal directory before launching the notebook.
 
+Note: Google provides a Jupyter cloud version called Colab.
+
 
 ## I/O and processes
 
