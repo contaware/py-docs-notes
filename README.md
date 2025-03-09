@@ -37,6 +37,7 @@ This document is a reference guide for Python programming. It is a bit more than
   - [Tuple (immutable list)](#tuple-immutable-list)
   - [Set (unordered collection of unique items)](#set-unordered-collection-of-unique-items)
   - [Dictionary (collection of key-value pairs)](#dictionary-collection-of-key-value-pairs)
+- [Type hints](#type-hints)
 - [Conditions](#conditions)
   - [if](#if)
   - [match-case](#match-case)
@@ -595,6 +596,34 @@ power2 = {k: 2**v for k, v in mydict.items()}
 # newlist = [(k, v) for k, v in iterable if condition == True]
 letter_pairs = {'a': 'A', 'b': 'B', 'c': 'C'}
 tuple_list = [(k, v) for k, v in letter_pairs.items()]
+```
+
+
+## Type hints
+
+Python does not enforce variable type and function annotations. They can be used by third party tools such as type checkers, IDEs and linters.
+
+```py
+# Use the name of the type in the annotation
+x: int = 1
+x: float = 1.0
+x: bool = True
+x: str = "test"
+
+# The item type is in brackets
+x: list[int] = [1, 2, 4]
+x: set[int] = {6, 7}
+x: dict[str, float] = {"field1": 1.0, "field2": 3.0}
+x: tuple[int, str, float] = (3, "yes", 7.5)
+
+# Annotate a function definition like
+def stringify(num: int) -> str:
+    return str(num)
+
+# - If a function does not return a value, use None as the return type
+# - Default value for an argument goes after the type annotation
+def show(value: str, excitement: int = 10) -> None:
+    print(value + "!" * excitement)
 ```
 
 
