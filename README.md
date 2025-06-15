@@ -159,13 +159,13 @@ Under Linux/macOS to be able to execute a Python script without invoking it thro
 
 ## Syntax
 
-Python is **case-sensitive**. Comments start at `#` and end with the line, there are no multi-line comments. Python programmers usually use snake case (lowercase with words separated by underscores). Semicolons can be used to separate statements on the same line, but are not required to terminate statements.
+Python is **case-sensitive**. Comments start at `#` and end with the line, there are no multi-line comments. But when several lines of code have to be comment out for testing, it's more practical to make them an unassigned [triple-quoted string literal](#strings) by surrounding them with **triple-quotes**. Python programmers usually use **snake case** (lowercase with words separated by underscores). Semicolons can be used to separate statements on the same line, but are not required to terminate statements.
 
-Code blocks are always preceded by a colon on the previous line. You should be aware that the amount of spaces (or tabs) used for indenting code blocks is up to the user, as long as it is consistent throughout the script. Most style guides recommend to indent code blocks by four spaces instead of a tab (never mix tabs with spaces). Writing the statement(s) directly after the colon on the same line is allowed but discouraged.
+**Code blocks are always preceded by a colon on the previous line**. You should be aware that the amount of spaces (or tabs) used for indenting code blocks is up to the user, as long as it is consistent throughout the script. Most style guides recommend **indenting** code blocks by **four spaces** rather than using a tab (never mix tabs with spaces). Writing the statement(s) directly after the colon on the same line is allowed but discouraged.
 
 It's possible to continue expressions on the next line if within parentheses. Also the initializations of the collection types can span multiple lines.
 
-Python uses zero based indexing; negative indexing is allowed, `-1` is the index of the last element, `-2` the second-to-last and so on.
+Python uses **zero based indexing**; negative indexing is allowed, `-1` is the index of the last element, `-2` the second-to-last and so on.
 
 
 ## Variables, immutability and mutability
