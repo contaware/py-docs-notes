@@ -193,7 +193,7 @@ The variable types are **dynamic** and determined at runtime. The objects are su
    - Shallow copies (with `.copy` or [slicing](#slicing)) only make a copy of the first level objects, sublists remain referenced. To copy everything use the `copy` module with its `copy.deepcopy()` function.
 
 
-To check whether two objects point to the same object us the identity operators `is` (not identity operator: `is not`). Get the object id with `id(obj)` and the object type with `type(obj)`.
+To check whether two variable names point to the same object us the **identity operators** `is` (not identity operator: `is not`). Get the object id with `id(obj)` and the object type with `type(obj)`.
 
 In Python functions are using **pass-by-assignment**. When we call a function, each parameter becomes a new nickname to the given object:
 
