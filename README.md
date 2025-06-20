@@ -971,7 +971,7 @@ pip uninstall <pkgs>
 ```
 
 - The `pip` package names aren't case sensitive.
-- Instead of installing globally, it's possible to use the `--user` option to install packages for the current user only. Note that on many Linux/macOS systems, installing without `sudo` implies the `--user` option.
+- Instead of installing globally, it's possible to use the `--user` option to install packages for the current user only. Note that on many Linux/macOS systems, installing without `sudo` implies the `--user` option. Listing with `--user` only shows packages installed with `--user`, while not using that option lists all packages.
 - To protect packages which may also be installed by your system package manager (like `apt` for example), since Python 3.11 some systems require the `--break-system-packages` option, and that also with the `--user` option.
 
 ### Virtual environment
