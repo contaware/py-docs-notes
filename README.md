@@ -631,6 +631,12 @@ def show(value: str, excitement: int = 10) -> None:
 
 ## Conditions
 
+The terms **truthy** and **falsy** refer to values that are not booleans but, when evaluated, assume the values of `True` and `False`.
+
+- **Falsy**: `None`, **zero** of any numeric type, **empty** strings, sequences or collections.
+
+- **Truthy**: all the others.
+ 
 ### if
 
 ```py
