@@ -59,6 +59,7 @@ This document is a reference guide for Python programming. It is a bit more than
   - [Virtual environment](#virtual-environment)
     - [Linux/macOS](#linuxmacos)
     - [Windows](#windows-1)
+    - [Check whether in virtual environment](#check-whether-in-virtual-environment)
   - [Examples of packages](#examples-of-packages)
 - [Math](#math)
 - [Date/Time](#datetime)
@@ -969,7 +970,7 @@ pip uninstall <pkgs>
 
 ### Virtual environment
 
-It's possible to create an isolated Python installation with separate packages for a each of your projects. To do that, go to your project's directory and run the following commands:
+It's possible to create an isolated Python installation with separate packages for a each of your projects. To do that, go to your project's directory and run the following commands.
 
 #### Linux/macOS
 
@@ -1014,6 +1015,24 @@ It's possible to create an isolated Python installation with separate packages f
    ```
    deactivate
    ```
+
+#### Check whether in virtual environment
+
+- From terminal it shows the path of `.venv`:
+
+  ```
+  pip -V
+  ```
+
+- From script:
+  
+  ```py
+  import sys
+  if sys.prefix != sys.base_prefix:
+      print("Inside virtual environment")
+  else:
+      print("Not inside virtual environment")
+  ```
 
 ### Examples of packages
 
