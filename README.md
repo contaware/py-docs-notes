@@ -976,7 +976,7 @@ pip uninstall <pkgs>
 
 ### Virtual environment
 
-It's possible to create an isolated Python installation with separate packages for a each of your projects. To do that, go to your project's directory and run the following commands.
+It's possible to create an isolated Python installation with separate packages for a each of your projects. By default only the packages explicitly installed in the virtual environment are accessible. To work with a virtual environment go to your project's directory and run the following commands.
 
 #### Linux/macOS
 
