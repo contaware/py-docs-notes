@@ -50,6 +50,7 @@ This document is a reference guide for Python programming. It is a bit more than
 - [Classes](#classes)
 - [Modules](#modules)
   - [Import](#import)
+  - [Conditional import](#conditional-import)
   - [Custom](#custom)
   - [Direct run check](#direct-run-check)
 - [Packages](#packages)
@@ -897,6 +898,19 @@ print(a1.compute_distance(a2))
 - `from fibo import fib, fib2`: this imports names from a module directly into the importing module's symbol table. This does not introduce the module name from which the imports are taken in the local symbol table (so in the example, `fibo` is not defined).
 
 - `from fibo import *`: this imports all names that a module defines. Do not use this facility since it introduces an unknown set of names into the interpreter, possibly hiding some things you have already defined.
+
+### Conditional import
+
+```
+try:
+    import cowsay
+except ImportError:
+    cowsay = None
+if cowsay:
+    cowsay.cow("Good Morning!")
+else:
+    print("Good Morning! (cowsay not installed)")
+```
 
 ### Custom
 
