@@ -182,13 +182,13 @@ The variable types are **dynamic** and determined at runtime. The objects are su
 
 1. **Immutable** are objects whose internal state/values can't be changed or altered:
 
-   ```
+   ```py
    NoneType, int, float, bool, str, tuple, complex, bytes
    ```
 
 2. **Mutable** are objects whose internal state/values can be changed after creation:
 
-   ```
+   ```py
    list, set, dict, bytearray
    ```
 
@@ -902,7 +902,7 @@ print(a1.compute_distance(a2))
 
 ### Conditional import
 
-```
+```py
 try:
     import cowsay
 except ImportError:
