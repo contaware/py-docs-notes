@@ -149,6 +149,24 @@ Help in Python is always available right in the interpreter:
 - `help(obj)` describes an object, without an argument the interactive help starts.
 - `dir(obj)` shows all the object's methods, without an argument it returns the list of names in the current local scope.
 
+If the first statement in a function, class or module is an unassigned string literal, then it's called a **docstring**. By convention [multiline strings](#strings) are used. The Docstring becomes the `__doc__` special attribute of that object which can be printed with `help(obj)`:
+
+```py
+def sum_nums(a, b):
+    """Sum two numbers.
+
+    Args:
+        a: first number.
+        b: second number.
+
+    Returns:
+        The sum of the two numbers.
+    """
+    return a + b
+
+help(sum_nums) # uses: sum_nums.__doc__
+```
+
 
 ## Shebang line
 
@@ -382,7 +400,7 @@ any(iterable)
 
 Strings can either be single-quoted or double-quoted and can contain backslash escapes like `\\`  `\'`  `\"`  `\r` `\n` `\t`. Use `\ooo` for the octal character `ooo` and `\xhh` for the hex character `hh`. Unicode characters are represented with `\uxxxx` or `\Uxxxxxxxx`. Strings prefixed with `r` or `R` are raw strings which treat backslashes as literal characters. Strings prefixed by `f` or `F` are f-strings which allow embedding expressions inside string literals. It's also possible to combine the prefixes to get raw f-strings.
 
-To have a string span multiple lines, place a backslash at the end of the lines or to have the newlines in the string, surround in triple-quotes.
+To have a **string span multiple lines**, place a backslash at the end of the lines or to have the newlines in the string, surround in **triple-quotes**.
 
 Making strings:
 
