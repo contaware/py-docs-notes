@@ -10,7 +10,6 @@ This document is a reference guide for Python programming. It is a bit more than
   - [Linux](#linux)
   - [macOS](#macos)
   - [Windows](#windows)
-- [Help](#help)
 - [Shebang line](#shebang-line)
 - [Syntax](#syntax)
 - [Variables, immutability and mutability](#variables-immutability-and-mutability)
@@ -37,6 +36,7 @@ This document is a reference guide for Python programming. It is a bit more than
   - [Tuple (immutable list)](#tuple-immutable-list)
   - [Set (unordered collection of unique items)](#set-unordered-collection-of-unique-items)
   - [Dictionary (collection of key-value pairs)](#dictionary-collection-of-key-value-pairs)
+- [Help and docstring](#help-and-docstring)
 - [Type hints](#type-hints)
 - [Conditions](#conditions)
   - [if](#if)
@@ -139,32 +139,6 @@ If you also have **non py-launcher aware** installations in your `PATH` (use `wh
 
 ```
 py -<version> -m pip --version
-```
-
-
-## Help
-
-Help in Python is always available right in the interpreter:
-
-- `help(obj)` describes an object, without an argument the interactive help starts.
-- `dir(obj)` shows all the object's methods, without an argument it returns the list of names in the current local scope.
-
-If the first statement in a function, class or module is an unassigned string literal, then it's called a **docstring**. By convention [multiline strings](#strings) are used. The Docstring becomes the `__doc__` special attribute of that object which can be printed with `help(obj)`:
-
-```py
-def sum_nums(a, b):
-    """Sum two numbers.
-
-    Args:
-        a: first number.
-        b: second number.
-
-    Returns:
-        The sum of the two numbers.
-    """
-    return a + b
-
-help(sum_nums) # uses: sum_nums.__doc__
 ```
 
 
@@ -616,6 +590,32 @@ power2 = {k: 2**v for k, v in mydict.items()}
 # newlist = [(k, v) for k, v in iterable if condition == True]
 letter_pairs = {'a': 'A', 'b': 'B', 'c': 'C'}
 tuple_list = [(k, v) for k, v in letter_pairs.items()]
+```
+
+
+## Help and docstring
+
+Help in Python is always available right in the interpreter:
+
+- `help(obj)` describes an object, without an argument the interactive help starts.
+- `dir(obj)` shows all the object's methods, without an argument it returns the list of names in the current local scope.
+
+If the first statement in a function, class or module is an unassigned string literal, then it's called a **docstring**. By convention [multiline strings](#strings) are used. The docstring becomes the `__doc__` special attribute of that object which can be printed with `help(obj)`:
+
+```py
+def sum_nums(a, b):
+    """Sum two numbers.
+
+    Args:
+        a: first number.
+        b: second number.
+
+    Returns:
+        The sum of the two numbers.
+    """
+    return a + b
+
+help(sum_nums) # uses: sum_nums.__doc__
 ```
 
 
