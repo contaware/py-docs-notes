@@ -1167,16 +1167,21 @@ Note: Google provides a Jupyter cloud version called Colab.
 
 ### Read file
 
-By default a file is opened in read and text mode. Open with the `encoding='utf-8'` argument to make sure utf-8 is used on all systems.
+By default a file is opened in read and text mode. Opening fails if the file does not exist. Open with the `encoding='utf-8'` argument to make sure utf-8 is used on all systems.
 
 To open a file in binary mode use `'rb'`.
 
 ```py
 my_file = open('my_file.txt')    # default mode is 'r'
 for line in my_file:
-    do_stuff_with(line.rstrip()) # trim trailing newline
+    print(line.rstrip())         # trim trailing newline
+my_file.seek(0)	                 # move to the beginning
+lines1 = my_file.readlines()     # newline characters not removed
+print(lines1)                    # print lines list
+my_file.seek(0)	                 # move to the beginning
 text = my_file.read()            # slurp file in one go
-lines = text.splitlines()        # newline characters removed
+lines2 = text.splitlines()       # newline characters removed
+print(lines2)                    # print lines list                    
 print(my_file.name)              # file name
 print(my_file.mode)              # file mode
 print(my_file.closed)            # is file closed?
