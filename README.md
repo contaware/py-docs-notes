@@ -164,7 +164,7 @@ Python uses **zero based indexing**; negative indexing is allowed, `-1` is the i
 
 ## Variables, immutability and mutability
 
-In Python all variables are objects, and the variable names are **labels** assigned to objects. Assigning variables is just like giving a new nickname, in `foo = bar = baz = 3` the variable names are just labels for the same object.
+In Python all variables are objects, and the variable names are **labels** assigned to objects. Variables names are composed of alphanumeric characters or underscores and are not permitted to commence with a number. Assigning variables is just like giving a new nickname, in `foo = bar = baz = 3` the variable names are just labels for the same object.
 
 In Python assignments are statements, use the **assignment expression** operator `:=` to have the right side value returned (this construct is also called a named expression).
 
