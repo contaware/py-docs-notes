@@ -166,7 +166,7 @@ Python uses **zero based indexing**; negative indexing is allowed, `-1` is the i
 
 In Python all variables are objects, and the variable names are **labels** assigned to objects. Variables names are composed of alphanumeric characters or underscores and are not permitted to commence with a number. Assigning variables is just like giving a new nickname, in `foo = bar = baz = 3` the variable names are just labels for the same object.
 
-In Python assignments are statements, use the **assignment expression** operator `:=` to have the right side value returned (this construct is also called a named expression).
+In Python assignments are statements, use the **assignment expression** or **Walrus** operator `:=` to have the right side value returned. This construct is also called a named expression.
 
 By convention the `_` variable is used as a placeholder/throwaway variable in for-loops or when unpacking, and in the interactive shell it stores the last expression value.
 
