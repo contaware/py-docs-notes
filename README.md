@@ -1190,7 +1190,7 @@ my_file.close()
 
 ### Write file
 
-The write mode is `'w'`, and the append mode is `'a'`; for both cases the file is written in text mode. By default the line ending is automatically converted depending from the system. To always use a specific line ending open with the `newline='\n'` argument. Open with the `encoding='utf-8'` argument to make sure utf-8 is used on all systems.
+The write mode is `'w'`, and the append mode is `'a'`; for both cases the file is written in text mode and created if not existing. By default the line ending is automatically converted depending from the system. To always use a specific line ending open with the `newline='\n'` argument. Open with the `encoding='utf-8'` argument to make sure utf-8 is used on all systems.
 
 To open a file in binary mode use `'wb'` or `'ab'`.
 
