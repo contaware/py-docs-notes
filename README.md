@@ -45,6 +45,7 @@ This document is a reference guide for Python programming. It is a bit more than
 - [Conditions](#conditions)
   - [Truthy and Falsy](#truthy-and-falsy)
   - [if](#if)
+  - [Conditional expression](#conditional-expression)
   - [match-case](#match-case)
   - [try-except](#try-except)
 - [Loops](#loops)
@@ -679,6 +680,19 @@ elif condition2:
     pass # use pass statement to do nothing
 else:
     print("One or more statements")
+```
+
+### Conditional expression
+
+If `condition` is `True`, the left-side of `if` is evaluated and its value is returned; otherwise, the right-side of `else` is evaluated and its value is returned.
+
+```py
+# Return value assigned
+ret = x if condition else y
+print(ret)
+
+# Return value ignored 
+print("OK") if condition else print("Not OK")
 ```
 
 ### match-case
