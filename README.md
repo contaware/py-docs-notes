@@ -1076,7 +1076,7 @@ It's possible to create an **isolated** Python installation with separate packag
 
 ### Examples of packages
 
-- App frameworks: `kivy` `pyqt` `tkinter`
+- App frameworks: `kivy` `tkinter` `pyqt` / `pyside`
 - Web frameworks: `django` `flask`
 - CLI frameworks: `click` `rich` `pyfiglet`
 - Config: `configparser` `xml` `json`
