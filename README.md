@@ -39,6 +39,7 @@ This document is a reference guide for Python programming. It is a bit more than
 - [Help and docstring](#help-and-docstring)
 - [Type hints](#type-hints)
 - [Conditions](#conditions)
+  - [Truthy and Falsy](#truthy-and-falsy)
   - [if](#if)
   - [match-case](#match-case)
   - [try-except](#try-except)
@@ -648,6 +649,8 @@ def show(value: str, excitement: int = 10) -> None:
 
 
 ## Conditions
+
+### Truthy and Falsy
 
 The terms **truthy** and **falsy** refer to values that are not booleans but, when evaluated, assume the values of `True` and `False`.
 
