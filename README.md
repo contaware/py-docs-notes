@@ -58,6 +58,7 @@ This document is a reference guide for Python programming. It is a bit more than
   - [Use](#use)
   - [Manage](#manage)
   - [Virtual environment](#virtual-environment)
+    - [Purpose](#purpose)
     - [Linux/macOS](#linuxmacos)
     - [Windows](#windows-1)
     - [Check whether in virtual environment](#check-whether-in-virtual-environment)
@@ -997,11 +998,13 @@ pip uninstall <pkgs>
 
 ### Virtual environment
 
-It's possible to create an isolated Python installation with separate packages for a each of your projects. By default only the packages explicitly installed in the virtual environment are accessible. To work with a virtual environment go to your project's directory and run the following commands.
+#### Purpose
+
+It's possible to create an **isolated** Python installation with separate packages for each of your projects. By default only the packages explicitly installed in the virtual environment are accessible.
 
 #### Linux/macOS
 
-1. Create a virtual environment in `.venv` directory:
+1. Go to your project's directory and the first time create a virtual environment in `.venv` directory:
 
    ```
    python3 -m venv .venv
@@ -1023,7 +1026,7 @@ It's possible to create an isolated Python installation with separate packages f
 
 #### Windows
 
-1. Create a virtual environment in `.venv` directory:
+1. Go to your project's directory and the first time create a virtual environment in `.venv` directory:
 
    ```
    py -m venv .venv
