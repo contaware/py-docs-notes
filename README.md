@@ -30,6 +30,10 @@ This document is a reference guide for Python programming. It is a bit more than
   - [Complex numbers](#complex-numbers)
   - [Booleans](#booleans)
   - [Strings](#strings)
+    - [Defining](#defining)
+    - [Formatting](#formatting)
+    - [Manipulation](#manipulation)
+    - [Regular expression](#regular-expression)
   - [Bytes and bytearray](#bytes-and-bytearray)
 - [Collections](#collections)
   - [List (ordered sequence of objects)](#list-ordered-sequence-of-objects)
@@ -374,23 +378,24 @@ any(iterable)
 
 ### Strings
 
+#### Defining
+
 Strings can either be single-quoted or double-quoted and can contain backslash escapes like `\\`  `\'`  `\"`  `\r` `\n` `\t`. Use `\ooo` for the octal character `ooo` and `\xhh` for the hex character `hh`. Unicode characters are represented with `\uxxxx` or `\Uxxxxxxxx`. Strings prefixed with `r` or `R` are raw strings which treat backslashes as literal characters. Strings prefixed by `f` or `F` are f-strings which allow embedding expressions inside string literals. It's also possible to combine the prefixes to get raw f-strings.
 
-To have a **string span multiple lines**, place a backslash at the end of the lines or to have the newlines in the string, surround in **triple-quotes**.
-
-Making strings:
+To have the newlines in the string, surround in **triple-quotes**.
 
 ```py
 converted = str(12)
 repetition = 4 * "string"
-concatenation = "str1" + "str2"
-span_lines = "str1\
+concat1 = "str1" + "str2"
+concat2 = "str1" "str2"
+concat3 = "str1\
 str2"
 multiline = """line1
 line2"""
 ```
 
-String formatting:
+#### Formatting
 
 ```py
 val1, num1, num2 = "one", 123, 59.058
@@ -411,7 +416,7 @@ print(f"_{num1+num2:.0f}_")
 print(f"{{foo}}")
 ```
 
-String manipulation:
+#### Manipulation
 
 ```py
 text.upper()
@@ -421,19 +426,24 @@ text.strip()    # trim whitespaces
 text.lstrip()   # trim left whitespaces
 text.rstrip()   # trim right whitespaces
 sub in text     # return True or False
-text.find(sub)  # return index (-1 if not found)
+text.index(sub) # raises ValueError if not found
+text.find(sub)  # return index, -1 if not found
 text.rfind(sub) # return index of last one
 "1,2,3".split(",")     # return a list
 text.replace(old, new) # replace all
 ```
 
-Regular expression operations, use raw strings to avoid interpreting backslashes:
+#### Regular expression
+
+Always use raw strings to avoid interpreting backslashes.
 
 ```py
 import re
-re.search(r'pattern', text)  # return first as Match or None
-re.split(r'[^a-zA-Z]', text) # return a list
-re.sub(r'pattern', r'replacement', text) # replace all
+m = re.search(r'pattern', text)   # return first as Match or None
+print(text[m.start():m.end()])    # m.end() is exclusive 
+l1 = re.findall(r'pattern', text) # return all found as a list
+l2 = re.split(r'[^a-zA-Z]', text) # return splits as a list
+res = re.sub(r'pattern', r'replacement', text) # replace all
 ```
 
 ### Bytes and bytearray
