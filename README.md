@@ -68,6 +68,7 @@ This document is a reference guide for Python programming. It is a bit more than
     - [Check whether in virtual environment](#check-whether-in-virtual-environment)
   - [Examples of packages](#examples-of-packages)
 - [Math](#math)
+- [Random](#random)
 - [Date/Time](#datetime)
 - [JSON](#json)
 - [Jupyter](#jupyter)
@@ -1115,6 +1116,26 @@ print(math.isfinite(neg_inf)) # True if not inf and not nan
 print(sys.float_info.max*10)  # inf
 ```
 
+## Random
+
+There is no need to call `random.seed()` as it is called for us with the OS's randomness sources.
+
+```py
+import random
+
+# Floating-point
+x = random.random() # 0.0 <= x < 1.0
+
+# Integer
+# Note: random.randint(a, b)
+#                 =
+#       random.randrange(a, b+1)
+y = random.randint(a, b) # a <= y <= b
+
+# Randomly select an element from:
+# range(start, stop, step)
+z = random.randrange(start, stop, step)
+```
 
 ## Date/Time
 
