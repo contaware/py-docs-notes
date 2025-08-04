@@ -103,6 +103,7 @@ To verify that your script is running with the wanted version:
 ```py
 import sys
 print(sys.version)
+print(sys.executable)
 ```
 
 ### Linux
@@ -129,10 +130,11 @@ For Windows [download](https://www.python.org/downloads/) the installer and run 
 
 For Windows the official Python installer provides the `py.exe` launcher which can be used to choose the wanted Python version.
 
-To list the installed versions:
+To list the installed versions (**\*** indicates the active version):
 
 ```
 py --list
+py --list-paths
 ```
 
 To use a specific version:
