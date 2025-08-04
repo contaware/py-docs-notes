@@ -437,7 +437,7 @@ text.replace(old, new) # replace all
 
 #### Regular expression
 
-Always use raw strings to avoid interpreting backslashes.
+Always use raw string patterns to avoid interpreting backslashes.
 
 ```py
 import re
@@ -447,6 +447,9 @@ l1 = re.findall(r'pattern', text) # return all found as a list
 l2 = re.split(r'[^a-zA-Z]', text) # return splits as a list
 res = re.sub(r'pattern', r'replacement', text) # replace all
 ```
+
+The regex (regular expression) functions have a last parameter to alter the expression's behavior. The most common flags are `re.IGNORECASE`, `re.MULTILINE` and `re.DOTALL` which can be combined using the bitwise OR (the `|` operator).
+
 
 ### Bytes and bytearray
 
