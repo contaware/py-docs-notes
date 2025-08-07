@@ -450,7 +450,7 @@ l2 = re.split(r'[^a-zA-Z]', text) # return splits as a list
 res = re.sub(r'pattern', r'replacement', text) # replace all
 ```
 
-The regex (regular expression) functions have a last parameter to alter the expression's behavior. The most common flags are `re.IGNORECASE`, `re.MULTILINE` and `re.DOTALL` which can be combined using the bitwise OR (the `|` operator).
+The regex (regular expression) functions have a `flags` parameter to alter the expression's behavior. The most common flags are `re.IGNORECASE`, `re.MULTILINE`, `re.DOTALL` and `re.ASCII` which can be combined using the bitwise OR (the `|` operator). By default `\w` matches also unicode characters, with `re.ASCII` only ascii characters are matched.
 
 
 ### Bytes and bytearray
