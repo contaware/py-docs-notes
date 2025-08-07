@@ -167,7 +167,7 @@ Python is **case-sensitive**. Comments start at `#` and end with the line, there
 
 **Code blocks are always preceded by a colon**. A code block typically begins on a new line, with all statements having the same indentation amount. Note that the amount of spaces (or tabs) used to indent code blocks is up to the user, as long as it is consistent throughout the script. Most style guides recommend **indenting** code blocks by **four spaces** rather than using a tab (never mix tabs with spaces). Alternatively, a code block can be placed immediately after the colon on the same line, with semicolons separating the statements.
 
-It's possible to continue expressions on the next line if within parentheses. Also the initializations of the collection types can span multiple lines.
+When a single line contains `(` or `[` or `{` or `'''` or `"""`, it can be **split after these symbols** to extend across multiple lines. However, if a single line does not contain those symbols, it's necessary to add final **backslashes** to divide into multiple lines.
 
 Python uses **zero based indexing**; negative indexing is allowed, `-1` is the index of the last element, `-2` the second-to-last and so on.
 
