@@ -80,6 +80,7 @@ This document is a reference guide for Python programming. It is a bit more than
   - [stdout](#stdout)
   - [stderr](#stderr)
   - [Arguments](#arguments)
+  - [Exit process](#exit-process)
   - [Environment variables](#environment-variables)
   - [Path](#path)
   - [Terminal](#terminal)
@@ -1291,6 +1292,16 @@ sys.stderr.write('a logging message.\n')
 import sys
 for arg in sys.argv[1:]: # skip argv[0]
     print(arg)
+```
+
+### Exit process
+
+The `sys.exit` function raise a SystemExit exception, signaling an intention to exit the interpreter.
+
+```py
+import sys
+sys.exit()  # no error, same as sys.exit(0)
+sys.exit(1) # error range: 1-127
 ```
 
 ### Environment variables
