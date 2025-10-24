@@ -1296,7 +1296,7 @@ for arg in sys.argv[1:]: # skip argv[0]
 
 ### Exit process
 
-The `sys.exit` function raise a SystemExit exception, signaling an intention to exit the interpreter.
+The `sys.exit` function raises a SystemExit exception, signaling an intention to exit the interpreter.
 
 ```py
 import sys
