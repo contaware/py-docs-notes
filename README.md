@@ -70,6 +70,7 @@ This document is a reference guide for Python programming. It is a bit more than
   - [Examples of packages](#examples-of-packages)
 - [Math](#math)
 - [Random](#random)
+- [Time](#time)
 - [Date/Time](#datetime)
 - [JSON](#json)
 - [Jupyter](#jupyter)
@@ -1136,6 +1137,7 @@ print(math.isfinite(neg_inf)) # True if not inf and not nan
 print(sys.float_info.max*10)  # inf
 ```
 
+
 ## Random
 
 There is no need to call `random.seed()` as it is called for us with the OS's randomness sources.
@@ -1156,6 +1158,23 @@ y = random.randint(a, b) # a <= y <= b
 # range(start, stop, step)
 z = random.randrange(start, stop, step)
 ```
+
+
+## Time
+
+```py
+import time
+
+# Pause execution for the given seconds
+time.sleep(1.5);
+
+# Measuring execution time
+start_time = time.time() # seconds since the Unix epoch
+# some code...
+end_time = time.time()   # seconds since the Unix epoch
+print("Execution Time:", end_time - start_time, "sec")
+```
+
 
 ## Date/Time
 
