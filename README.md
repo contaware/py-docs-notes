@@ -1166,7 +1166,7 @@ z = random.randrange(start, stop, step)
 import time
 
 # Pause execution for the given seconds
-time.sleep(1.5);
+time.sleep(1.5)
 
 # Measuring execution time
 start_time = time.time() # seconds since the Unix epoch
