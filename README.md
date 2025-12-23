@@ -847,7 +847,7 @@ while (num := next(iter_range, None)) is not None:
 
 ## Functions
 
-The passed number of arguments must much the function definition, except for the default arguments which are optional:
+The passed number of arguments must match the function definition, except for the default arguments which are optional:
 
 ```py
 def my_calc(x, y):
